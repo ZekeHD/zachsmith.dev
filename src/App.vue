@@ -1,29 +1,53 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+<div class="page-container">
+  <div class="content">
+    <router-view />
   </div>
-  <router-view />
+  <FooterComponent></FooterComponent>
+</div>
 </template>
 
+<script lang="ts">
+import FooterComponent from './components/FooterComponent.vue';
+export default {
+  name: 'App',
+  components: {
+    FooterComponent,
+  }
+}
+</script>
+
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Teko:wght@300;400;500;600;700&display=swap');
+body {
+  font-family: 'Teko', Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-}
+  user-select: none;
 
-#nav {
-  padding: 30px;
+  p, body, html {
+    margin: 0;
+    padding: 0;
+  }
 
   a {
-    font-weight: bold;
-    color: #2c3e50;
+    text-decoration: none;
+  }
 
-    &.router-link-exact-active {
-      color: #42b983;
+  .page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    background-color: white;
+    height: 98vh;
+
+    .content {
+      flex-grow: 1;
+      width: 85%;
+      margin: auto;
     }
   }
 }
