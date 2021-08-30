@@ -27,7 +27,7 @@ body {
   color: #2c3e50;
   user-select: none;
 
-  p, body, html {
+  html, body, p {
     margin: 0;
     padding: 0;
   }
@@ -41,7 +41,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    background-color: white;
+    box-sizing: border-box;
     height: 98vh;
 
     .content {

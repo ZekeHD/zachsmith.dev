@@ -1,10 +1,13 @@
 <template>
-  <p>foo sounddesign</p>
+  <p>{{ foo }}</p>
 </template>
 
 <script>
 export default {
-  name: 'SoundDesignHome'
+  name: 'SoundDesignHome',
+  data: () =>({
+    foo: 'f',
+  }),
 }
 </script>
 

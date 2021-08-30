@@ -1,16 +1,17 @@
 <template>
   <p class="heading">Hey there, I'm <span>Zach Smith</span>.</p>
-  <p class="description">
-    I'm a
-    <span>front-end web engineer</span>,
-    <span>back-end API dev</span>,
-    and also have a knack for<br>
-    <span>sound design.</span>
-  </p>
+  <div class="description">
+    I'm a...
+    <div class="titles">
+      <span>full-stack web engineer</span>
+      <span>video editor</span>
+      <span>sound designer</span>
+    </div>
+  </div>
   <p class="welcome">
-    I'm currently based out of
-    <span>Augusta, GA</span>
-    and work at <a href="https://ruralsourcing.com" target="_blank"><span>Rural Sourcing, Inc.</span></a>
+    Currently based out of <span>Augusta, GA</span>
+    and doing <span>full-stack development</span> for enterprise-level clients at
+    <a href="https://ruralsourcing.com" target="_blank"><span>Rural Sourcing, Inc.</span></a>
   </p>
 </template>
 
@@ -31,35 +32,20 @@ export default {
   font-weight: 500;
   line-height: 1em;
   margin-bottom: 20px;
+  text-align: left;
+
+  .titles {
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 .welcome {
   font-size: 48px;
   margin-bottom: 30px;
-  
-    a {
-      &:hover {
-        span {
-          color: rgba(102, 0, 0, 0.8);
-        }
-      }
-    }
-}
-
-.selection-container {
-  width: 50%;
-  margin: auto;
-  font-size: 32px;
-
-  .options-container {
-    display: flex;
-    justify-content: space-between;
-    text-transform: uppercase;
-  }
 }
 
 span {
   color: rgba(255, 0, 0, 1);
-  transition: color 0.2s ease-out;
 }
 </style>
