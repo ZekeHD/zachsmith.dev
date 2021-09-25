@@ -1,6 +1,8 @@
 <template>
-  <HomeComponent></HomeComponent>
-  <NavComponent></NavComponent>
+  <div>
+    <HomeComponent></HomeComponent>
+    <NavComponent></NavComponent>
+  </div>
 </template>
 
 <script lang="ts">

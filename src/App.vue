@@ -1,7 +1,11 @@
 <template>
 <div class="page-container">
   <div class="content">
-    <router-view />
+    <router-view v-slot="{ Component }">
+      <transition name="fade" mode="out-in" appear>
+        <component :is="Component"></component>
+      </transition>
+    </router-view>
   </div>
   <FooterComponent></FooterComponent>
 </div>
@@ -19,8 +23,10 @@ export default {
 
 <style lang="scss">
 @import url('https://fonts.googleapis.com/css2?family=Teko:wght@300;400;500;600;700&display=swap');
+
 body {
   font-family: 'Teko', Avenir, Helvetica, Arial, sans-serif;
+  font-size: 58px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -48,6 +54,14 @@ body {
       flex-grow: 1;
       width: 85%;
       margin: auto;
+
+      .fade-enter-from, .fade-leave-to {
+        opacity: 0;
+      }
+
+      .fade-enter-active, .fade-leave-active {
+        transition: opacity 0.3s ease-out;
+      }
     }
   }
 }
