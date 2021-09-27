@@ -2,7 +2,7 @@
 <div class="page-container">
   <div class="content">
     <header>
-      <HeaderComponent :condenseHeader="condenseHeader" :showNavLinks="showNavLinks"></HeaderComponent>
+      <HeaderComponent :condenseHeader="condenseHeader"></HeaderComponent>
     </header>
     <main>
       <router-view v-slot="{ Component }">
@@ -10,7 +10,6 @@
           name="fade"
           mode="out-in"
           @before-leave="beforeLeave"
-          @after-leave="afterLeave"
           appear
         >
           <component :is="Component"></component>
@@ -37,30 +36,22 @@ export default defineComponent({
     FooterComponent,
   },
   data: () => ({
-    showNavLinks: false,
     condenseHeader: false,
   }),
   beforeMount() {
-    this.setShowNavLinks();
+    this.setCondenseHeader();
   },
   methods: {
     beforeLeave() {
-      console.log('before leave');
       this.setCondenseHeader();
-    },
-    afterLeave() {
-      console.log('after leave');
-      this.setShowNavLinks();
     },
     setCondenseHeader() {
       this.condenseHeader = this.pathNotHome;
     },
-    setShowNavLinks() {
-      this.showNavLinks = this.pathNotHome;
-    },
   },
   computed: {
     pathNotHome() {
+      console.log(this.$route);
       return this.$route.fullPath !== '/';
     },
   },

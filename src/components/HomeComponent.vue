@@ -19,10 +19,6 @@
 <script lang="ts">
 export default {
   name: 'HomeComponent',
-  beforeRouteEnter(to, from, next) {
-    console.log(to)
-    next();
-  }
 }
 </script>
 <style lang="scss" scoped>

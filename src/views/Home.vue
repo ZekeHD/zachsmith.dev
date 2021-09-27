@@ -15,12 +15,6 @@ import NavComponent from '../components/NavComponent.vue';
     HomeComponent,
     NavComponent
   },
-  // beforeRouteEnter(to, from, next) {
-  //   console.log(to);
-  // },
-  // beforeRouteLeave(to, from, next) {
-
-  // }
 })
 export default class Home extends Vue {}
 </script>

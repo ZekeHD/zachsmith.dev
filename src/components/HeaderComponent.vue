@@ -1,15 +1,14 @@
 <template>
-  <div class="heading" :class="{ 'hide-hello': condenseHeader, 'translate-name': showNavLinks }">
+  <div class="heading" :class="{ 'hide-hello': condenseHeader }">
     <p class="hello-statement">Hey there, I'm&nbsp;</p>
     <span class="name-container">
-      <div v-if="showNavLinks" class="header-nav">
-        <router-link to="/"><span class="emphasis-red link-underline">Zach Smith</span></router-link>&nbsp;&nbsp;|&nbsp;
-        <router-link to="/webdev" class="link-underline all-caps">full stack dev</router-link>&nbsp;&nbsp;|&nbsp;
+      <router-link v-if="condenseHeader" to="/"><span class="emphasis-red link-underline">Zach Smith</span></router-link>
+      <span v-else class="emphasis-red">Zach Smith</span>
+      <span class="extra-links__expanded">
+        <span>&nbsp;&nbsp;|&nbsp;</span>
+        <router-link to="/webdev" class="link-underline all-caps">full stack dev</router-link>&nbsp;&nbsp;|
         <router-link to="/sounddesign" class="link-underline all-caps">sound design</router-link>
-      </div>
-      <template v-else>
-        <span class="emphasis-red">Zach Smith</span>.
-      </template>
+      </span>
     </span>
   </div>
 </template>
@@ -38,26 +37,35 @@ export default defineComponent({
     max-width: 405px;
     max-height: 104px;
     white-space: nowrap;
-    transition: max-width 0.4s ease-in-out, max-height 0.4s ease-in-out, opacity 0.4s ease-in-out 0.5s;
+    transition: max-width 0.4s ease-in-out, opacity 0.4s ease-in-out 0.5s;
   }
 
   .name-container {
     z-index: 2;
     white-space: nowrap;
     overflow: hidden;
+
+    .extra-links__expanded {
+      opacity: 0;
+      pointer-events: none;
+      user-select: none;
+      transition: opacity 0.4s ease-in-out;
+    }
   }
 
   &.hide-hello {
     .hello-statement {
-      transition: all 0.4s ease-in-out;
+      transition: max-width 0.4s ease-in-out 0.4s, opacity 0.4s ease-in-out;
       opacity: 0;
-    }
-  }
-
-  &.translate-name {
-    .hello-statement {
       max-width: 0;
       max-height: 0;
+    }
+
+    .extra-links__expanded  {
+      opacity: 1;
+      pointer-events: initial;
+      user-select: initial;
+      transition: opacity 0.4s ease-in-out;
     }
   }
 }
