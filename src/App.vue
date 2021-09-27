@@ -1,24 +1,70 @@
 <template>
 <div class="page-container">
   <div class="content">
-    <router-view v-slot="{ Component }">
-      <transition name="fade" mode="out-in" appear>
-        <component :is="Component"></component>
-      </transition>
-    </router-view>
+    <header>
+      <HeaderComponent :condenseHeader="condenseHeader" :showNavLinks="showNavLinks"></HeaderComponent>
+    </header>
+    <main>
+      <router-view v-slot="{ Component }">
+        <transition
+          name="fade"
+          mode="out-in"
+          @before-leave="beforeLeave"
+          @after-leave="afterLeave"
+          appear
+        >
+          <component :is="Component"></component>
+        </transition>
+      </router-view>
+    </main>
   </div>
-  <FooterComponent></FooterComponent>
+  <footer>
+    <FooterComponent></FooterComponent>
+  </footer>
 </div>
 </template>
 
 <script lang="ts">
+import { defineComponent } from 'vue';
+
+import HeaderComponent from './components/HeaderComponent.vue';
 import FooterComponent from './components/FooterComponent.vue';
-export default {
+
+export default defineComponent({
   name: 'App',
   components: {
+    HeaderComponent,
     FooterComponent,
-  }
-}
+  },
+  data: () => ({
+    showNavLinks: false,
+    condenseHeader: false,
+  }),
+  beforeMount() {
+    this.setShowNavLinks();
+  },
+  methods: {
+    beforeLeave() {
+      console.log('before leave');
+      this.setCondenseHeader();
+    },
+    afterLeave() {
+      console.log('after leave');
+      this.setShowNavLinks();
+    },
+    setCondenseHeader() {
+      this.condenseHeader = this.pathNotHome;
+    },
+    setShowNavLinks() {
+      this.showNavLinks = this.pathNotHome;
+    },
+  },
+  computed: {
+    pathNotHome() {
+      return this.$route.fullPath !== '/';
+    },
+  },
+});
 </script>
 
 <style lang="scss">
@@ -60,7 +106,7 @@ body {
       }
 
       .fade-enter-active, .fade-leave-active {
-        transition: opacity 0.3s ease-out;
+        transition: opacity 0.4s ease-out;
       }
     }
   }

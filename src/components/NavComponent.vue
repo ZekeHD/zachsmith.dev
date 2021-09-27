@@ -1,9 +1,9 @@
 <template>
 <div class="nav-container">
   <p>I'm looking for...</p>
-  <nav class="options-container">
+  <nav class="options-container all-caps">
     <router-link to="/webdev" class="link-underline">full stack dev</router-link>
-    <router-link to="/sounddesign" class="link-underline">editing/sound design</router-link>
+    <router-link to="/sounddesign" class="link-underline">sound design/editing</router-link>
   </nav>
 </div>
 </template>
@@ -27,7 +27,6 @@ export default {
   .options-container {
     display: flex;
     justify-content: space-between;
-    text-transform: uppercase;
   }
 }
 </style>

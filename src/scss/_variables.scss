@@ -2,7 +2,7 @@
 $text-red: rgb(255, 0, 0);
 
 // CLASSES
-.emphasis {
+.emphasis-red {
   color: $text-red;
 }
 
@@ -42,4 +42,8 @@ $text-red: rgb(255, 0, 0);
   &:hover::before {
     transform: scaleX(1);
   }
+}
+
+.all-caps {
+  text-transform: uppercase;
 }
