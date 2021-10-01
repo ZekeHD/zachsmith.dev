@@ -21,5 +21,10 @@ export default createRouter({
       name: 'Sound Design',
       component: SoundDesign,
     },
+    {
+      path: '/:catchAll(.*)*',
+      name: 'Home',
+      component: Home,
+    }
   ],
 });

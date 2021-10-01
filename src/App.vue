@@ -1,24 +1,56 @@
 <template>
 <div class="page-container">
   <div class="content">
-    <router-view v-slot="{ Component }">
-      <transition name="fade" mode="out-in" appear>
-        <component :is="Component"></component>
-      </transition>
-    </router-view>
+    <HeaderComponent :condenseHeader="condenseHeader"></HeaderComponent>
+    <main>
+      <router-view v-slot="{ Component }">
+        <transition
+          name="fade"
+          mode="out-in"
+          @before-leave="beforeLeave"
+          appear
+        >
+          <component :is="Component"></component>
+        </transition>
+      </router-view>
+    </main>
   </div>
   <FooterComponent></FooterComponent>
 </div>
 </template>
 
 <script lang="ts">
+import { defineComponent } from 'vue';
+
+import HeaderComponent from './components/HeaderComponent.vue';
 import FooterComponent from './components/FooterComponent.vue';
-export default {
+
+export default defineComponent({
   name: 'App',
   components: {
+    HeaderComponent,
     FooterComponent,
-  }
-}
+  },
+  data: () => ({
+    condenseHeader: false,
+  }),
+  beforeMount() {
+    this.setCondenseHeader();
+  },
+  methods: {
+    beforeLeave() {
+      this.setCondenseHeader();
+    },
+    setCondenseHeader() {
+      this.condenseHeader = this.pathNotHome;
+    },
+  },
+  computed: {
+    pathNotHome() {
+      return this.$route.fullPath !== '/';
+    },
+  },
+});
 </script>
 
 <style lang="scss">
@@ -41,6 +73,10 @@ body {
   a {
     text-decoration: none;
   }
+  
+  ul {
+    margin: 0;
+  }
 
   .page-container {
     display: flex;
@@ -60,7 +96,7 @@ body {
       }
 
       .fade-enter-active, .fade-leave-active {
-        transition: opacity 0.3s ease-out;
+        transition: opacity 0.4s ease-out;
       }
     }
   }
