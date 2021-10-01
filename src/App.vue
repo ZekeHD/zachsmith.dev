@@ -1,9 +1,7 @@
 <template>
 <div class="page-container">
   <div class="content">
-    <header>
-      <HeaderComponent :condenseHeader="condenseHeader"></HeaderComponent>
-    </header>
+    <HeaderComponent :condenseHeader="condenseHeader"></HeaderComponent>
     <main>
       <router-view v-slot="{ Component }">
         <transition
@@ -17,9 +15,7 @@
       </router-view>
     </main>
   </div>
-  <footer>
-    <FooterComponent></FooterComponent>
-  </footer>
+  <FooterComponent></FooterComponent>
 </div>
 </template>
 
@@ -51,7 +47,6 @@ export default defineComponent({
   },
   computed: {
     pathNotHome() {
-      console.log(this.$route);
       return this.$route.fullPath !== '/';
     },
   },
@@ -77,6 +72,10 @@ body {
 
   a {
     text-decoration: none;
+  }
+  
+  ul {
+    margin: 0;
   }
 
   .page-container {

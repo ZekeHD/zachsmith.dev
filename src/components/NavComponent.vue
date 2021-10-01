@@ -1,9 +1,15 @@
 <template>
 <div class="nav-container">
   <p>I'm looking for...</p>
-  <nav class="options-container all-caps">
-    <router-link to="/webdev" class="link-underline">full stack dev</router-link>
-    <router-link to="/sounddesign" class="link-underline">sound design/editing</router-link>
+  <nav>
+    <ul class="options-container all-caps">
+      <li>
+        <router-link to="/webdev" class="link-underline">full stack dev</router-link>
+      </li>
+      <li>
+        <router-link to="/sounddesign" class="link-underline">sound design/editing</router-link>
+      </li>
+    </ul>
   </nav>
 </div>
 </template>
@@ -27,6 +33,10 @@ export default {
   .options-container {
     display: flex;
     justify-content: space-between;
+
+    li {
+      list-style-type: none;
+    }
   }
 }
 </style>

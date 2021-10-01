@@ -1,16 +1,24 @@
 <template>
-  <div class="heading" :class="{ 'hide-hello': condenseHeader }">
-    <p class="hello-statement">Hey there, I'm&nbsp;</p>
-    <span class="name-container">
-      <router-link v-if="condenseHeader" to="/"><span class="emphasis-red link-underline">Zach Smith</span></router-link>
-      <span v-else class="emphasis-red">Zach Smith</span>
-      <span class="extra-links__expanded">
-        <span>&nbsp;&nbsp;|&nbsp;</span>
-        <router-link to="/webdev" class="link-underline all-caps">full stack dev</router-link>&nbsp;&nbsp;|
-        <router-link to="/sounddesign" class="link-underline all-caps">sound design</router-link>
-      </span>
-    </span>
-  </div>
+  <header class="heading" :class="{ 'hide-hello': condenseHeader }">
+    <span class="hello-statement">Hey there, I'm&nbsp;</span>
+    <nav class="links-container">
+      <ul class="links-container__list">
+        <li class="home-text emphasis-red">
+          <router-link class="home-text__link" to="/"><span class="link-underline">Zach Smith.</span></router-link>
+          <span class="home-text__text">Zach Smith.</span>
+        </li>
+        <template class="extra-links">
+          <span>&nbsp;&nbsp;|</span>
+          <li>
+            &nbsp;&nbsp;<router-link to="/webdev" class="link-underline all-caps">full stack dev</router-link>&nbsp;&nbsp;|
+          </li>
+          <li>
+            &nbsp;&nbsp;<router-link to="/sounddesign" class="link-underline all-caps">sound design</router-link>
+          </li>
+        </template>
+      </ul>
+    </nav>
+  </header>
 </template>
 
 <script lang="ts">
@@ -20,7 +28,6 @@ export default defineComponent({
   name: 'HeaderComponent',
   props: {
     condenseHeader: Boolean,
-    showNavLinks: Boolean,
   },
 });
 </script>
@@ -37,19 +44,40 @@ export default defineComponent({
     max-width: 405px;
     max-height: 104px;
     white-space: nowrap;
-    transition: max-width 0.4s ease-in-out, opacity 0.4s ease-in-out 0.5s;
+    transition: max-width 0.4s ease-in-out 0.3s, opacity 0.4s ease-in-out 0.5s;
   }
 
-  .name-container {
+  .links-container {
     z-index: 2;
     white-space: nowrap;
     overflow: hidden;
 
-    .extra-links__expanded {
-      opacity: 0;
-      pointer-events: none;
-      user-select: none;
-      transition: opacity 0.4s ease-in-out;
+    &__list {
+      display: flex;
+      margin: 0;
+      padding: 0;
+
+      .home-text {
+        &__link {
+          display: none;
+        }
+
+        &__text {
+          display: inline;
+        }
+      }
+
+      .extra-links {
+        display: flex;
+        opacity: 0;
+        pointer-events: none;
+        user-select: none;
+        transition: opacity 0.4s ease-in-out;
+      }
+
+      li {
+        list-style-type: none;
+      }
     }
   }
 
@@ -61,7 +89,17 @@ export default defineComponent({
       max-height: 0;
     }
 
-    .extra-links__expanded  {
+    .home-text {
+      &__link {
+        display: inline;
+      }
+
+      &__text {
+        display: none;
+      }
+    }
+
+    .extra-links {
       opacity: 1;
       pointer-events: initial;
       user-select: initial;

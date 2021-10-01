@@ -1,11 +1,9 @@
 <template>
-  <footer>
-    <div class="footer-container">
-      <p>Get in touch:</p>
-      <a href="https://www.linkedin.com/in/zachsmith258/" target="_blank">
-        <img src="../assets/linkedin.png">
-      </a>
-    </div>
+  <footer class="footer-container">
+    <p>Get in touch:</p>
+    <a href="https://www.linkedin.com/in/zachsmith258/" target="_blank">
+      <img src="../assets/linkedin.png">
+    </a>
   </footer>
 </template>
 
