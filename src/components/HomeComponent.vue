@@ -1,5 +1,5 @@
 <template>
-  <div class="description">
+  <div class="description left-align">
     I'm a...
     <div class="titles">
       <span class="emphasis-red">full-stack web engineer</span>
@@ -8,7 +8,7 @@
       <span class="emphasis-red">professional bad guitar player</span>
     </div>
   </div>
-  <p class="welcome">
+  <p class="welcome left-align">
     Currently based out of <span class="emphasis-red">Augusta, GA</span>
     and doing <span class="emphasis-red">full-stack development</span>
     for enterprise-level clients at
@@ -25,6 +25,5 @@ export default {
 .welcome {
   font-size: 48px;
   margin-bottom: 30px;
-  text-align: left;
 }
 </style>

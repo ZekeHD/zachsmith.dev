@@ -5,7 +5,7 @@
 <script>
 export default {
   name: 'SoundDesignHome',
-  data: () =>({
+  data: () => ({
     foo: 'f',
   }),
 }

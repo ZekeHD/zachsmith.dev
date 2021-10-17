@@ -62,7 +62,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #e3e3e3;
+  background-color: #3d3d3d;
   user-select: none;
 
   html, body, p {
@@ -84,12 +85,12 @@ body {
     align-items: center;
     justify-content: space-around;
     box-sizing: border-box;
-    height: 98vh;
 
     .content {
       flex-grow: 1;
       width: 85%;
-      margin: auto;
+      margin: 0 auto 25vh;
+      z-index: 1;
 
       .fade-enter-from, .fade-leave-to {
         opacity: 0;

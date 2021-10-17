@@ -1,6 +1,7 @@
 <template>
   <div>
     <HomeComponent></HomeComponent>
+    <hr>
     <NavComponent></NavComponent>
   </div>
 </template>
