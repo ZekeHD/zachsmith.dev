@@ -1,4 +1,5 @@
 module.exports = {
+  publicPath: '/PortfolioWebsite/',
   css: {
     requireModuleExtension: false,
     loaderOptions: {
