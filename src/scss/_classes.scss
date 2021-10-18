@@ -3,7 +3,7 @@
   line-height: 1em;
   text-decoration: none;
   position: relative;
-  color: red;
+  color: $text-red;
 
   &::before {
     content: "";
@@ -13,7 +13,7 @@
     height: 3px;
     bottom: 0;
     left: 0;
-    background-color: red;
+    background-color: $text-red;
     transform: scaleX(if($active, 1, 0));
     transform-origin: bottom left;
     transition: transform 0.3s ease;
@@ -30,11 +30,18 @@
   color: $text-red;
 }
 
+.left-align {
+  text-align: left;
+}
+
+.right-align {
+  text-align: right;
+}
+
 .description {
   font-weight: 500;
   line-height: 1em;
   margin-bottom: 20px;
-  text-align: left;
 
   .titles {
     display: flex;

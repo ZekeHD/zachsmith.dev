@@ -1,5 +1,5 @@
 <template>
-  <header class="heading" :class="{ 'hide-hello': condenseHeader }">
+  <header class="heading left-align" :class="{ 'hide-hello': condenseHeader }">
     <span class="hello-statement">Hey there, I'm&nbsp;</span>
     <nav class="links-container">
       <ul class="links-container__list">
@@ -34,7 +34,6 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .heading {
-  text-align: left;
   font-size: 72px;
   font-weight: 700;
   margin: 30px auto 0;
