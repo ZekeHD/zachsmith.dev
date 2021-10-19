@@ -1,13 +1,12 @@
 <template>
 <div class="page-container">
   <div class="content">
-    <HeaderComponent :condenseHeader="condenseHeader"></HeaderComponent>
+    <HeaderComponent :condense-header="condenseHeader"></HeaderComponent>
     <main>
       <router-view v-slot="{ Component }">
         <transition
           name="fade"
           mode="out-in"
-          @before-leave="beforeLeave"
           appear
         >
           <component :is="Component"></component>
@@ -31,22 +30,8 @@ export default defineComponent({
     HeaderComponent,
     FooterComponent,
   },
-  data: () => ({
-    condenseHeader: false,
-  }),
-  beforeMount() {
-    this.setCondenseHeader();
-  },
-  methods: {
-    beforeLeave() {
-      this.setCondenseHeader();
-    },
-    setCondenseHeader() {
-      this.condenseHeader = this.pathNotHome;
-    },
-  },
   computed: {
-    pathNotHome() {
+    condenseHeader() {
       return this.$route.fullPath !== '/';
     },
   },
