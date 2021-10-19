@@ -45,7 +45,8 @@ import { defineComponent } from 'vue';
 import ExperienceComponent from '../components/career/ExperienceComponent.vue';
 import ProficienciesComponent from '../components/career/ProficienciesComponent.vue';
 
-import { Experience } from '../shared/interfaces/Experience';
+import { employers } from '../shared/employers';
+import { educations } from '../shared/educations';
 import { proficiencies } from '../shared/proficiencies';
 
 export default defineComponent({
@@ -55,32 +56,8 @@ export default defineComponent({
     ProficienciesComponent
   },
   data: () => ({
-    employers: [
-      {
-        name: 'Rural Sourcing, Inc.',
-        termLength: 'June 2018 - Present',
-        descriptions: [
-          `\
-Rural Sourcing is a U.S.-based IT/Development Consulting firm that has served \
-many enterprise-level clients, such as ParkMobile, Cars.com, and Southwest Airlines.`,
-        `\
-I previously consulted for a Fortune-500 company's ad campaign on their site, and am \
-currently consulting for an EOS web app, helping drive their SMS and email campaigns.`
-        ],
-        role: 'Web Developer/Consultant',
-        url: 'https://ruralsourcing.com',
-      },
-    ] as Experience[],
-    educations: [
-      {
-        name: 'Augusta University',
-        termLength: 'August 2014 - May 2018',
-        descriptions: [
-          'Bachelor of Science in Information Technology',
-          'Minor in Computer Science',
-        ]
-      }
-    ] as Experience[],
+    employers,
+    educations,
     proficiencies,
   }),
 });
