@@ -17,9 +17,11 @@
 </template>
 
 <script lang="ts">
-export default {
+import { defineComponent } from 'vue';
+
+export default defineComponent({
   name: 'HomeComponent',
-}
+});
 </script>
 <style lang="scss" scoped>
 .welcome {

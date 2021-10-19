@@ -1,8 +1,8 @@
 <template>
   <div>
-    <HomeComponent></HomeComponent>
+    <home-component></home-component>
     <hr>
-    <NavComponent></NavComponent>
+    <nav-component></nav-component>
   </div>
 </template>
 
@@ -12,6 +12,7 @@ import HomeComponent from '../components/HomeComponent.vue';
 import NavComponent from '../components/NavComponent.vue';
 
 @Options({
+  name: 'HomeView',
   components: {
     HomeComponent,
     NavComponent
