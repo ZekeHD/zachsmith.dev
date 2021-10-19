@@ -74,7 +74,7 @@ body {
     .content {
       flex-grow: 1;
       width: 85%;
-      margin: 0 auto 25vh;
+      margin: 0 auto 10vh;
       z-index: 1;
 
       .fade-enter-from, .fade-leave-to {
