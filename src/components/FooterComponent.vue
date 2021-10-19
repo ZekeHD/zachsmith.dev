@@ -8,9 +8,11 @@
 </template>
 
 <script lang="ts">
-export default {
-  name: 'FooterComponent'
-}
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+  name: 'FooterComponent',
+});
 </script>
 
 <style lang="scss" scoped>

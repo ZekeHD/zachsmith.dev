@@ -10,32 +10,32 @@
     </div>
     <hr>
     <p class="profs__text all-caps emphasis-red left-align">proficiencies</p>
-    <ProficienciesComponent
+    <proficiencies-component
       v-for="proficiency in proficiencies"
       :key="proficiency.title"
       :title="proficiency.title"
       :techs="proficiency.techs"
-    ></ProficienciesComponent>
+    ></proficiencies-component>
     <hr>
     <p class="emphasis-red all-caps left-align">professional experience</p>
-    <ExperienceComponent
+    <experience-component
       v-for="employer in employers"
       :key="employer.name"
       :name="employer.name"
-      :termLength="employer.termLength"
+      :term-length="employer.termLength"
       :descriptions="employer.descriptions"
       :role="employer.role"
       :url="employer.name"
-    ></ExperienceComponent>
+    ></experience-component>
     <hr>
     <p class="emphasis-red all-caps left-align">education</p>
-    <ExperienceComponent
+    <experience-component
       v-for="education in educations"
       :key="education.name"
       :name="education.name"
-      :termLength="education.termLength"
+      :term-length="education.termLength"
       :descriptions="education.descriptions"
-    ></ExperienceComponent>
+    ></experience-component>
   </div>
 </template>
 
@@ -49,6 +49,7 @@ import { Experience } from '../shared/interfaces/Experience';
 import { proficiencies } from '../shared/proficiencies';
 
 export default defineComponent({
+  name: 'WebDevView',
   components: {
     ExperienceComponent,
     ProficienciesComponent

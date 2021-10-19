@@ -3,9 +3,11 @@
 </template>
 
 <script>
-export default {
-  name: 'SoundDesign',
-}
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+  name: 'SoundDesignView',
+});
 </script>
 
 <style>

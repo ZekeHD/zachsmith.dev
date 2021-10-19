@@ -1,7 +1,7 @@
 <template>
 <div class="page-container">
   <div class="content">
-    <HeaderComponent :condense-header="condenseHeader"></HeaderComponent>
+    <header-component :condense-header="condenseHeader"></header-component>
     <main>
       <router-view v-slot="{ Component }">
         <transition
@@ -14,7 +14,7 @@
       </router-view>
     </main>
   </div>
-  <FooterComponent></FooterComponent>
+  <footer-component></footer-component>
 </div>
 </template>
 
@@ -25,7 +25,7 @@ import HeaderComponent from './components/HeaderComponent.vue';
 import FooterComponent from './components/FooterComponent.vue';
 
 export default defineComponent({
-  name: 'App',
+  name: 'AppComponent',
   components: {
     HeaderComponent,
     FooterComponent,
