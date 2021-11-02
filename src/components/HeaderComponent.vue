@@ -1,24 +1,24 @@
 <template>
-  <header class="heading left-align" :class="{ 'hide-hello': condenseHeader }">
-    <span class="hello-statement">Hey there, I'm&nbsp;</span>
-    <nav class="links-container">
-      <ul class="links-container__list">
-        <li class="home-text emphasis-red">
-          <router-link class="home-text__link" to="/"><span class="link-underline">Zach Smith.</span></router-link>
-          <span class="home-text__text">Zach Smith.</span>
+<header class="heading left-align" :class="{ 'hide-hello': condenseHeader }">
+  <span class="hello-statement">Hey there, I'm&nbsp;</span>
+  <nav class="links-container">
+    <ul class="links-container__list">
+      <li class="home-text emphasis-red">
+        <router-link class="home-text__link" to="/"><span class="link-underline">Zach Smith.</span></router-link>
+        <span class="home-text__text">Zach Smith.</span>
+      </li>
+      <template class="extra-links">
+        <span>&nbsp;&nbsp;|</span>
+        <li>
+          &nbsp;&nbsp;<router-link to="/webdev" class="link-underline all-caps">full stack dev</router-link>&nbsp;&nbsp;|
         </li>
-        <template class="extra-links">
-          <span>&nbsp;&nbsp;|</span>
-          <li>
-            &nbsp;&nbsp;<router-link to="/webdev" class="link-underline all-caps">full stack dev</router-link>&nbsp;&nbsp;|
-          </li>
-          <li>
-            &nbsp;&nbsp;<router-link to="/sounddesign" class="link-underline all-caps">sound design</router-link>
-          </li>
-        </template>
-      </ul>
-    </nav>
-  </header>
+        <li>
+          &nbsp;&nbsp;<router-link to="/sounddesign" class="link-underline all-caps">sound design</router-link>
+        </li>
+      </template>
+    </ul>
+  </nav>
+</header>
 </template>
 
 <script lang="ts">
@@ -34,10 +34,18 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .heading {
-  font-size: 72px;
+  font-size: calc(20px + 1.5vw);
   font-weight: 700;
   margin: 30px auto 0;
   display: flex;
+
+  @include screen-gt($size-tablet) {
+    font-size: calc(36px + 2vw);
+
+    @include screen-gt($size-desktop) {
+      font-size: calc(48px + 1.5vw);
+    }
+  }
 
   .hello-statement {
     max-width: 405px;
@@ -106,5 +114,4 @@ export default defineComponent({
     }
   }
 }
-
 </style>

@@ -43,13 +43,21 @@ export default defineComponent({
 
 body {
   font-family: 'Teko', Avenir, Helvetica, Arial, sans-serif;
-  font-size: 58px;
+  font-size: calc(20px + 1.2vw);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #e3e3e3;
   background-color: #3d3d3d;
   user-select: none;
+
+  @include screen-gt($size-tablet) {
+    font-size: calc(28px + 1.5vw);
+
+    @include screen-gt($size-desktop) {
+      font-size: 48px;
+    }
+  }
 
   html, body, p {
     margin: 0;
@@ -69,6 +77,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
+    margin: auto;
     box-sizing: border-box;
 
     .content {
@@ -76,6 +85,10 @@ body {
       width: 85%;
       margin: 0 auto 10vh;
       z-index: 1;
+
+      @include screen-gt($size-tablet) {
+        margin-bottom: 12vh;
+      }
 
       .fade-enter-from, .fade-leave-to {
         opacity: 0;
