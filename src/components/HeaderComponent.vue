@@ -36,7 +36,7 @@ export default defineComponent({
 .heading {
   font-size: calc(20px + 1.5vw);
   font-weight: 700;
-  margin: 30px auto 0;
+  margin: 15px auto 0;
   display: flex;
 
   @include screen-gt($size-tablet) {
@@ -48,10 +48,10 @@ export default defineComponent({
   }
 
   .hello-statement {
-    max-width: 405px;
+    max-width: 100%;
     max-height: 104px;
     white-space: nowrap;
-    transition: max-width 0.4s ease-in-out 0.3s, opacity 0.4s ease-in-out 0.5s;
+    transition: max-width 0.4s ease-in-out 0.4s, opacity 0.4s ease-in-out 0.5s;
   }
 
   .links-container {
@@ -90,7 +90,7 @@ export default defineComponent({
 
   &.hide-hello {
     .hello-statement {
-      transition: max-width 0.4s ease-in-out 0.4s, opacity 0.4s ease-in-out;
+      transition: max-width 0.4s ease-in-out 0.2s, opacity 0.4s ease-in-out;
       opacity: 0;
       max-width: 0;
       max-height: 0;

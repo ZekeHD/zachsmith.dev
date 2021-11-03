@@ -7,8 +7,7 @@
         <router-link to="/webdev" class="link-underline">full stack dev</router-link>
       </li>
       <li>
-        <router-link to="/sounddesign" class="link-underline disabled">sound design/editing</router-link>
-        <p>(coming soon!)</p>
+        <router-link to="/sounddesign" class="link-underline">sound design/editing</router-link>
       </li>
     </ul>
   </nav>
@@ -52,12 +51,6 @@ export default defineComponent({
 
     li {
       list-style-type: none;
-
-      .disabled {
-        color: grey;
-        user-select: none;
-        pointer-events: none;
-      }
     }
   }
 }

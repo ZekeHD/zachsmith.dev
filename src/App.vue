@@ -82,11 +82,12 @@ body {
 
     .content {
       flex-grow: 1;
-      width: 85%;
-      margin: 0 auto 10vh;
+      width: 90%;
+      margin: 0 auto 7vh;
       z-index: 1;
 
       @include screen-gt($size-tablet) {
+        width: 85%;
         margin-bottom: 12vh;
       }
 
