@@ -1,9 +1,9 @@
 <template>
-  <div>
-    <home-component></home-component>
-    <hr>
-    <nav-component></nav-component>
-  </div>
+<div>
+  <home-component></home-component>
+  <hr>
+  <nav-component></nav-component>
+</div>
 </template>
 
 <script lang="ts">

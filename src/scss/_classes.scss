@@ -26,6 +26,10 @@
   }
 }
 
+@mixin screen-gt($size) {
+  @media screen and (min-width: $size) { @content; }
+}
+
 .emphasis-red {
   color: $text-red;
 }
@@ -38,14 +42,33 @@
   text-align: right;
 }
 
-.description {
-  font-weight: 500;
+.descriptions {
+  font-weight: 400;
   line-height: 1em;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 
   .titles {
     display: flex;
     flex-direction: column;
+  }
+}
+
+.description-sentences {
+  p {
+    line-height: 1.2em;
+    margin-bottom: 8px;
+  }
+}
+
+.section-title {
+  font-size: calc(26px + 1.5vw);
+
+  @include screen-gt($size-tablet) {
+    font-size: calc(40px + 2vw);
+
+    @include screen-gt($size-desktop) {
+      font-size: 70px;
+    }
   }
 }
 
