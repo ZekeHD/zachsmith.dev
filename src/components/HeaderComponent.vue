@@ -36,8 +36,12 @@ export default defineComponent({
   font-size: clamp(24px, 4.5vw, 62px);
   transition: font-size 0.4s ease-in-out 0.3s;
   font-weight: 700;
-  margin: 15px auto 0;
+  margin: 15px auto 5px;
   display: flex;
+
+  @include screen-gt($size-tablet) {
+    margin-bottom: 0;
+  }
 
   &.hide-hello {
     font-size: clamp(15.5px, 4.5vw, 62px);

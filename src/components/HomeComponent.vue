@@ -1,28 +1,32 @@
 <template>
-<div class="description left-align">
-  <span class="im-a">I'm a...</span>
-  <div class="titles-picture__container">
-    <div class="titles">
-      <span class="emphasis-red">full-stack web engineer</span>
-      <span class="emphasis-red">video editor</span>
-      <span class="emphasis-red">sound designer</span>
-      <span class="emphasis-red">professional bad guitar player</span>
-    </div>
-    <div class="picture__container">
-      <img class="portrait" :src="portraitPath">
-      <span class="portrait-name">
-        <p>Zach Smith</p>
-        <img :src="arrowPath">
-      </span>
+<div>
+  <div class="descriptions left-align">
+    <span class="im-a">I'm a...</span>
+    <div class="titles-picture__container">
+      <div class="titles">
+        <span class="emphasis-red">full-stack web engineer</span>
+        <span class="emphasis-red">video editor</span>
+        <span class="emphasis-red">sound designer</span>
+        <span class="emphasis-red">professional bad guitar player</span>
+      </div>
+      <div class="picture__container">
+        <img class="portrait" :src="portraitPath">
+        <span class="portrait-name">
+          <p>Zach Smith</p>
+          <img :src="arrowPath">
+        </span>
+      </div>
     </div>
   </div>
+  <div class="description-sentences left-align">
+    <p>
+      Currently based out of <span class="emphasis-red">Augusta, GA</span>
+      and doing <span class="emphasis-red">full-stack development</span>
+      for enterprise-level clients at
+      <a href="https://ruralsourcing.com" target="_blank" class="link-underline">Rural Sourcing, Inc.</a>
+    </p>
+  </div>
 </div>
-<p class="welcome left-align">
-  Currently based out of <span class="emphasis-red">Augusta, GA</span>
-  and doing <span class="emphasis-red">full-stack development</span>
-  for enterprise-level clients at
-  <a href="https://ruralsourcing.com" target="_blank" class="link-underline">Rural Sourcing, Inc.</a>
-</p>
 </template>
 
 <script lang="ts">
@@ -39,6 +43,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 .titles-picture__container {
   position: relative;
+  margin-bottom: 20px;
 
   .picture__container {
     display: flex;
@@ -54,11 +59,11 @@ export default defineComponent({
 
     img.portrait {
       width: 26vw;
-      max-width: 110px;
+      max-width: 150px;
       height: auto;
       position: relative;
       right: 0;
-      bottom: 25px;
+      bottom: 5px;
       border-radius: 50%;
       object-fit: cover;
       background-color: $off-white;
@@ -66,6 +71,7 @@ export default defineComponent({
       aspect-ratio: 1;
 
       @include screen-gt($size-phablet) {
+        width: 24vw;
         position: static;
         margin-bottom: 10px;
 
@@ -101,17 +107,8 @@ export default defineComponent({
 }
 
 .welcome {
-  font-size: calc(16px + 2vw);
   line-height: 1.2em;
   margin-bottom: 30px;
-
-  @include screen-gt($size-tablet) {
-    font-size: calc(24px + 1.5vw);
-
-    @include screen-gt($size-desktop) {
-      font-size: 44px;
-    }
-  }
 }
 
 
