@@ -74,6 +74,7 @@ export default defineComponent({
       list-style-type: none;
 
       img {
+        object-fit: contain;
         height: calc(45px + 1.5vw);
 
         @include screen-gt($size-tablet) {
