@@ -10,10 +10,10 @@
         <span class="emphasis-red">professional bad guitar player</span>
       </div>
       <div class="portrait__container">
-        <div class="portrait-wrapper" :style=" cssProps"></div>
+        <div class="portrait-wrapper" :style="cssProps" aria-label="Portrait image of Zach Smith"></div>
         <span class="portrait-name">
           <p>Zach Smith</p>
-          <img :src="arrowPath">
+          <img :src="arrowPath" alt="arrow pointing upwards at portrait image of Zach Smith">
         </span>
       </div>
     </div>

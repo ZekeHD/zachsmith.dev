@@ -10,7 +10,8 @@
         frameborder="0"
         allow="autoplay;fullscreen;picture-in-picture"
         allowfullscreen
-        style="position:absolute;top:0;left:0;width:100%;height:100%;">
+        style="position:absolute;top:0;left:0;width:100%;height:100%;"
+        :aria-label="'video of ' + title">
       </iframe>
     </div>
   </div>
@@ -26,6 +27,13 @@ import { Video } from '../../shared/videos';
 export default defineComponent({
   name: 'SoundDesignComponent',
   mounted() {
+    const initialWidthEvent: Partial<UIEvent> = {
+      target: {
+        innerWidth: window.innerWidth,
+      } as Window,
+    };
+
+    this.setDisplayTitles(initialWidthEvent);
     window.addEventListener('resize', this.setDisplayTitles);
   },
   beforeUnmount() {
@@ -42,10 +50,10 @@ export default defineComponent({
     displayTitlesBreakpoint: 524,
   }),
   methods: {
-    setDisplayTitles(e: UIEvent) {
-      if (e) {
-        this.displayTitles =
-          (e.target as Window).innerWidth > this.displayTitlesBreakpoint;
+    setDisplayTitles(e: UIEvent | Partial<UIEvent>) {
+      const windowTarget = e?.target as Window;
+      if (windowTarget?.innerWidth) {
+        this.displayTitles = windowTarget.innerWidth > this.displayTitlesBreakpoint;
       }
     }
   },
