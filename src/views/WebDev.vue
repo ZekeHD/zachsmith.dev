@@ -1,11 +1,11 @@
 <template>
 <div>
-  <div class="description left-align">
+  <div class="descriptions left-align">
     <span class="emphasis-red">Better.<br></span>
     <span class="emphasis-red">Faster.<br></span>
     <span class="emphasis-red">Stronger UI/UX.<br></span>
   </div>
-  <div class="dev-description left-align">
+  <div class="description-sentences left-align">
     <p>I love creating easy-to-use and attractive user experiences.</p>
     <p>Let's get stuff done.</p>
   </div>
@@ -63,28 +63,3 @@ export default defineComponent({
   }),
 });
 </script>
-
-<style lang="scss" scoped>
-.description {
-  margin-bottom: 12px;
-}
-
-.section-title {
-  font-size: calc(26px + 1.5vw);
-
-  @include screen-gt($size-tablet) {
-    font-size: calc(40px + 2vw);
-
-    @include screen-gt($size-desktop) {
-      font-size: 70px;
-    }
-  }
-}
-
-.dev-description {
-  p {
-    line-height: 1.2em;
-    margin-bottom: 8px;
-  }
-}
-</style>
