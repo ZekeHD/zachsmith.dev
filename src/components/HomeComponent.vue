@@ -48,26 +48,34 @@ export default defineComponent({
     right: 0;
     bottom: 0;
 
+    @include screen-gt($size-tablet) {
+      right: 3vw;
+    }
+
     img.portrait {
-      width: 20vw;
+      width: 26vw;
+      max-width: 110px;
       height: auto;
       position: relative;
       right: 0;
-      bottom: 30px;
+      bottom: 25px;
       border-radius: 50%;
       object-fit: cover;
-      background-color: #e3e3e3;
-      padding: 8px;
+      background-color: $off-white;
+      padding: 4px;
       aspect-ratio: 1;
 
-      @include screen-gt(425px) {
-        width: 20vw;
-        max-width: 138px;
+      @include screen-gt($size-phablet) {
         position: static;
         margin-bottom: 10px;
 
         @include screen-gt($size-tablet) {
-          max-width: 230px;
+          max-width: 180px;
+          padding: 8px;
+
+          @include screen-gt($size-desktop) {
+            max-width: 250px;
+          }
         }
       }
     }
@@ -79,12 +87,12 @@ export default defineComponent({
 
       img {
         height: 0.5em;
-        min-height: 20px;
+        min-height: 15px;
         transform: scaleX(-1) rotate(30deg);
       }
     }
 
-    @include screen-gt(425px) {
+    @include screen-gt($size-phablet) {
       .portrait-name {
         display: flex;
       }

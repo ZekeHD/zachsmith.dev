@@ -20,11 +20,9 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .footer-container {
-  display: inline-flex;
+  display: flex;
+  align-items: center;
   flex-direction: row;
-  position: fixed;
-  bottom: 2vh;
-  left: 2vw;
   z-index: 0;
 
   @include screen-gt($size-tablet) {

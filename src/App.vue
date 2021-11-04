@@ -14,7 +14,7 @@
       </router-view>
     </main>
   </div>
-  <footer-component></footer-component>
+  <footer-component id="footer"></footer-component>
 </div>
 </template>
 
@@ -44,11 +44,12 @@ export default defineComponent({
 body {
   font-family: 'Teko', Avenir, Helvetica, Arial, sans-serif;
   font-size: calc(20px + 1.2vw);
+  font-weight: 400;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #e3e3e3;
-  background-color: #3d3d3d;
+  color: $off-white;
+  background-color: $off-black;
   user-select: none;
 
   @include screen-gt($size-tablet) {
@@ -82,12 +83,15 @@ body {
 
     .content {
       flex-grow: 1;
-      width: 90%;
+      width: 95%;
       margin: 0 auto 7vh;
       z-index: 1;
 
-      @include screen-gt($size-tablet) {
+      @include screen-gt($size-phablet) {
         width: 85%;
+      }
+
+      @include screen-gt($size-tablet) {
         margin-bottom: 12vh;
       }
 

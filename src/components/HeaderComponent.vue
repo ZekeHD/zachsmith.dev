@@ -8,9 +8,8 @@
         <span class="home-text__text">Zach Smith.</span>
       </li>
       <template class="extra-links">
-        <span>&nbsp;&nbsp;|</span>
         <li>
-          &nbsp;&nbsp;<router-link to="/webdev" class="link-underline all-caps">full stack dev</router-link>&nbsp;&nbsp;|
+          &nbsp;|&nbsp;&nbsp;<router-link to="/webdev" class="link-underline all-caps">full stack dev</router-link>&nbsp;&nbsp;|
         </li>
         <li>
           &nbsp;&nbsp;<router-link to="/sounddesign" class="link-underline all-caps">sound design</router-link>
@@ -34,22 +33,18 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .heading {
-  font-size: calc(20px + 1.5vw);
+  font-size: clamp(24px, 4.5vw, 62px);
+  transition: font-size 0.4s ease-in-out 0.3s;
   font-weight: 700;
   margin: 15px auto 0;
   display: flex;
 
-  @include screen-gt($size-tablet) {
-    font-size: calc(36px + 2vw);
-
-    @include screen-gt($size-desktop) {
-      font-size: calc(48px + 1.5vw);
-    }
+  &.hide-hello {
+    font-size: clamp(15.5px, 4.5vw, 62px);
   }
 
   .hello-statement {
     max-width: 100%;
-    max-height: 104px;
     white-space: nowrap;
     transition: max-width 0.4s ease-in-out 0.4s, opacity 0.4s ease-in-out 0.5s;
   }
