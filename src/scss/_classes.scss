@@ -26,6 +26,10 @@
   }
 }
 
+@mixin screen-gt($size) {
+  @media screen and (min-width: $size) { @content; }
+}
+
 .emphasis-red {
   color: $text-red;
 }
@@ -39,9 +43,13 @@
 }
 
 .description {
-  font-weight: 500;
+  font-weight: 400;
   line-height: 1em;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+
+  @include screen-gt($size-tablet) {
+    margin-bottom: 20px;
+  }
 
   .titles {
     display: flex;

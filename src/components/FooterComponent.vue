@@ -1,13 +1,13 @@
 <template>
-  <footer class="footer-container">
-    <p>Get in touch:</p>
-    <a href="https://www.linkedin.com/in/zachsmith258/" target="_blank">
-      <img src="@/assets/icons/linkedin.png" draggable="false" alt="LinkedIn link">
-    </a>
-    <a href="https://github.com/ZekeHD" target="_blank">
-      <img src="@/assets/icons/git.svg" draggable="false" alt="Github link">
-    </a>
-  </footer>
+<footer class="footer-container">
+  <p>Get in touch:</p>
+  <a href="https://www.linkedin.com/in/zachsmith258/" target="_blank">
+    <img src="@/assets/icons/linkedin.png" draggable="false" alt="LinkedIn link">
+  </a>
+  <a href="https://github.com/ZekeHD" target="_blank">
+    <img src="@/assets/icons/git.svg" draggable="false" alt="Github link">
+  </a>
+</footer>
 </template>
 
 <script lang="ts">
@@ -19,26 +19,33 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-  .footer-container {
-    display: inline-flex;
-    flex-direction: row;
-    font-size: 32px;
-    position: fixed;
-    bottom: 1vh;
-    left: 2vw;
-    z-index: 0;
+.footer-container {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  z-index: 0;
 
-    p {
-      margin-right: 8px;
-    }
-
-    img {
-      &:first-of-type {
-        margin-right: 10px;
-      }
-
-      width: 50px;
-      transition: width 0.3s ease-in-out;
+  @include screen-gt($size-tablet) {
+    @include screen-gt($size-desktop) {
+      font-size: 32px;
     }
   }
+
+  p {
+    margin-right: 12px;
+  }
+
+  img {
+    height: calc(18px + 1.5vw);
+    margin-right: 10px;
+
+    @include screen-gt($size-tablet) {
+      height: calc(25px + 2vw);
+
+      @include screen-gt($size-desktop) {
+        height: 40px;
+      }
+    }
+  }
+}
 </style>
