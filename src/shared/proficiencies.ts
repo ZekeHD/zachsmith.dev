@@ -35,7 +35,7 @@ const proficiencies: Proficiency[] = [
       },
       {
         name: 'JavaScript',
-        iconName: 'javascript.svg'
+        iconName: 'javascript.png'
       },
       {
         name: 'TypeScript',
