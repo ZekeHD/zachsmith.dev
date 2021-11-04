@@ -43,7 +43,7 @@ export default defineComponent({
 
 body {
   font-family: 'Teko', Avenir, Helvetica, Arial, sans-serif;
-  font-size: clamp(20px, 4.5vw, 32px);
+  font-size: clamp(22px, 4.5vw, 32px);
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

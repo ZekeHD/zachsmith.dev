@@ -2,15 +2,15 @@
 <div>
   <div class="descriptions left-align">
     <span class="im-a">I'm a...</span>
-    <div class="titles-picture__container">
+    <div class="titles-portrait__container">
       <div class="titles">
         <span class="emphasis-red">full-stack web engineer</span>
         <span class="emphasis-red">video editor</span>
         <span class="emphasis-red">sound designer</span>
         <span class="emphasis-red">professional bad guitar player</span>
       </div>
-      <div class="picture__container">
-        <img class="portrait" :src="portraitPath">
+      <div class="portrait__container">
+        <div class="portrait-wrapper" :style=" cssProps"></div>
         <span class="portrait-name">
           <p>Zach Smith</p>
           <img :src="arrowPath">
@@ -36,16 +36,22 @@ export default defineComponent({
   name: 'HomeComponent',
   computed: {
     portraitPath: () => require('@/assets/pictures/zach.png'),
+    cssProps(): { backgroundImage: string } {
+      return {
+        backgroundImage: `url(${this.portraitPath})`,
+      };
+    },
     arrowPath: () => require('@/assets/icons/arrow-up.svg'),
   },
 });
 </script>
+
 <style lang="scss" scoped>
-.titles-picture__container {
+.titles-portrait__container {
   position: relative;
   margin-bottom: 20px;
 
-  .picture__container {
+  .portrait__container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -57,30 +63,30 @@ export default defineComponent({
       right: 3vw;
     }
 
-    img.portrait {
-      width: 26vw;
-      max-width: 150px;
-      height: auto;
-      position: relative;
-      right: 0;
-      bottom: 5px;
+    .portrait-wrapper {
       border-radius: 50%;
-      object-fit: cover;
+      border: 4px solid $off-white;
+      overflow: hidden;
+      width: 27vw;
+      height: 27vw;
       background-color: $off-white;
-      padding: 4px;
-      aspect-ratio: 1;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
 
       @include screen-gt($size-phablet) {
-        width: 24vw;
-        position: static;
+        width: 23vw;
+        height: 23vw;
         margin-bottom: 10px;
 
         @include screen-gt($size-tablet) {
           max-width: 180px;
+          max-height: 180px;
           padding: 8px;
 
           @include screen-gt($size-desktop) {
             max-width: 250px;
+            max-height: 250px;
           }
         }
       }
@@ -94,6 +100,7 @@ export default defineComponent({
       img {
         height: 0.5em;
         min-height: 15px;
+        fill: $off-white;
         transform: scaleX(-1) rotate(30deg);
       }
     }
@@ -110,6 +117,4 @@ export default defineComponent({
   line-height: 1.2em;
   margin-bottom: 30px;
 }
-
-
 </style>
