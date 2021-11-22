@@ -1,7 +1,7 @@
 <template>
 <div class="page-container">
   <div class="content">
-    <p v-for="(contact, index) in contacts" :key="index">{{ contact.name }}</p>
+    <p v-for="(contact, index) in contactsExcludingId" :key="index">{{ contact.name }}</p>
     <header-component :condense-header="condenseHeader"></header-component>
     <main>
       <router-view v-slot="{ Component }">
@@ -21,11 +21,11 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { mapGetters, mapState } from 'vuex';
 
 import HeaderComponent from './components/HeaderComponent.vue';
 import FooterComponent from './components/FooterComponent.vue';
 import { store } from './store/store';
-import { mapState } from 'vuex';
 
 export default defineComponent({
   name: 'AppComponent',
@@ -42,7 +42,10 @@ export default defineComponent({
     },
     ...mapState([
       'contacts'
-    ])
+    ]),
+    ...mapGetters([
+      'contactsExcludingId',
+    ]),
   },
 });
 </script>

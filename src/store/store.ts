@@ -18,7 +18,7 @@ export const store = createStore<State>({
   actions: {
     async getContacts({ commit }) {
       try {
-        commit('updateContacts', await (await contactService.getContacts()).data);
+        commit('updateContacts', (await contactService.getContacts()).data);
       } catch (e) {
         console.error('error', e);
       }
@@ -28,5 +28,9 @@ export const store = createStore<State>({
     updateContacts(state, data) {
       state.contacts = data;
     },
+  },
+  getters: {
+    contactsExcludingId: state =>
+      state.contacts.filter((contact: any) => contact.id !== '4'),
   },
 });
