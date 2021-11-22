@@ -1,8 +1,12 @@
 import { createApp } from 'vue';
+import axios from 'axios';
 
-import App from "./App.vue";
+import App from './App.vue';
+import { store, key } from './store/store';
 import router from "./router";
 
-createApp(App)
-  .use(router)
-  .mount("#app");
+const app = createApp(App)
+  .use(store, key)
+  .use(router);
+
+app.mount('#app');

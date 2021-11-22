@@ -1,6 +1,7 @@
 <template>
 <div class="page-container">
   <div class="content">
+    <p v-for="(contact, index) in contacts" :key="index">{{ contact.name }}</p>
     <header-component :condense-header="condenseHeader"></header-component>
     <main>
       <router-view v-slot="{ Component }">
@@ -23,6 +24,8 @@ import { defineComponent } from 'vue';
 
 import HeaderComponent from './components/HeaderComponent.vue';
 import FooterComponent from './components/FooterComponent.vue';
+import { store } from './store/store';
+import { mapState } from 'vuex';
 
 export default defineComponent({
   name: 'AppComponent',
@@ -30,10 +33,16 @@ export default defineComponent({
     HeaderComponent,
     FooterComponent,
   },
+  async mounted() {
+    await store.dispatch('getContacts');
+  },
   computed: {
     condenseHeader() {
       return this.$route.fullPath !== '/';
     },
+    ...mapState([
+      'contacts'
+    ])
   },
 });
 </script>
