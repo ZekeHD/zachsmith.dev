@@ -4,4 +4,4 @@ export interface Experience {
   descriptions: string[];
   role?: string;
   url?: string;
-}
+};
