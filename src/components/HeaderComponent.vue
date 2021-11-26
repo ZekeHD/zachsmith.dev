@@ -35,6 +35,7 @@ export default defineComponent({
 .heading {
   font-size: clamp(24px, 4.5vw, 62px);
   transition: font-size 0.4s ease-in-out 0.3s;
+  will-change: font-size;
   font-weight: 700;
   margin: 15px auto 5px;
   display: flex;
@@ -51,6 +52,7 @@ export default defineComponent({
     max-width: 100%;
     white-space: nowrap;
     transition: max-width 0.4s ease-in-out 0.4s, opacity 0.4s ease-in-out 0.5s;
+    will-change: max-width, opacity;
   }
 
   .links-container {
@@ -79,6 +81,7 @@ export default defineComponent({
         pointer-events: none;
         user-select: none;
         transition: opacity 0.4s ease-in-out;
+        will-change: opacity;
       }
 
       li {
@@ -90,6 +93,7 @@ export default defineComponent({
   &.hide-hello {
     .hello-statement {
       transition: max-width 0.4s ease-in-out 0.2s, opacity 0.4s ease-in-out;
+      will-change: max-width, opacity;
       opacity: 0;
       max-width: 0;
       max-height: 0;
@@ -110,6 +114,7 @@ export default defineComponent({
       pointer-events: initial;
       user-select: initial;
       transition: opacity 0.4s ease-in-out;
+      will-change: opacity;
     }
   }
 }
