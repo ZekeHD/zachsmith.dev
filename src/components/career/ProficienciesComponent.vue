@@ -28,10 +28,16 @@ export default defineComponent({
     techs: Object as PropType<Proficiency['techs']>,
   },
   data: () => ({
-    hideYearsLabel: () => null,
+    debouncedHideYearsLabel: () => null,
+    touchscreen: false,
   }),
   created() {
-    this.hideYearsLabel = debounce(() => { this.$emit('hideYearsLabel', true) }, 1500);
+    this.debouncedHideYearsLabel = debounce(() => { this.$emit('hideYearsLabel', true) }, 1500);
+
+    const touchPoints = navigator.maxTouchPoints ?? 0;
+    if (touchPoints > 0) {
+      window.addEventListener('scroll', this.emitHideYearsLabel);
+    }
   },
   methods: {
     getIconPath(iconFileName: string): string {
@@ -42,7 +48,7 @@ export default defineComponent({
     },
     onTouch() {
       this.$emit('hideYearsLabel', false);
-      this.hideYearsLabel();
+      this.debouncedHideYearsLabel();
     },
     emitHideYearsLabel() {
       this.$emit('hideYearsLabel', true);
@@ -126,7 +132,7 @@ export default defineComponent({
       }
 
       &:hover {
-        transform: scale(0.95, 0.95);
+        transform: scale(0.94);
 
         &::after {
           opacity: 1;
