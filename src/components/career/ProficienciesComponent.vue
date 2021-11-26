@@ -29,7 +29,6 @@ export default defineComponent({
   },
   data: () => ({
     debouncedHideYearsLabel: () => null,
-    touchscreen: false,
   }),
   created() {
     this.debouncedHideYearsLabel = debounce(() => { this.$emit('hideYearsLabel', true) }, 1500);
