@@ -3,13 +3,16 @@
   <p class="title emphasis-red">{{ title }}</p>
   <ul v-if="techs">
     <li v-for="tech in techs" :key="tech.name"
-        @mouseenter="emitTechYears(tech.years)"
         @mousemove="updateMousePosition"
-        @mouseleave="emitHideYearsLabel"
+        @mouseleave=""
         v-touch="onTouch">
       <img :src="getIconPath(tech.iconName)" class="tech__icon" draggable="false" :alt="tech.name + ' icon'">
       <p class="name">{{ tech.name }}</p>
       <p class="note" v-if="tech.note">{{ tech.note }}</p>
+      <div class="floating-years__label" :style="getLabelDivStyles">
+        <p>{{ tech.years }}+</p>
+        <p>years</p>
+      </div>
     </li>
   </ul>
 </div>
@@ -21,6 +24,9 @@ import debounce from 'lodash.debounce';
 
 import { Proficiency } from '../../shared/proficiencies';
 
+const MOUSEX_DEFAULT = -1000;
+const MOUSEY_DEFAULT = -1000;
+
 export default defineComponent({
   name: 'ProficienciesComponent',
   props: {
@@ -28,7 +34,10 @@ export default defineComponent({
     techs: Object as PropType<Proficiency['techs']>,
   },
   data: () => ({
+    xPosition: MOUSEX_DEFAULT,
+    yPosition: MOUSEY_DEFAULT,
     hideYearsLabel: () => null,
+    showLabelDiv: false,
   }),
   created() {
     this.hideYearsLabel = debounce(() => { this.$emit('hideYearsLabel', true) }, 1500);
@@ -38,23 +47,27 @@ export default defineComponent({
       return require(`@/assets/icons/${iconFileName}`);
     },
     updateMousePosition(event: MouseEvent) {
-      this.emitMousePosition({ x: event.clientX, y: event.clientY });
+      // const x = event.pageX;
+      // const y = event.pageY;
+      // const target = event.target;
+
+      const bounds = (event.target as HTMLElement).getBoundingClientRect();
+      this.xPosition = event.clientX - bounds.left;
+      this.yPosition = event.clientY - bounds.top;
     },
     onTouch() {
-      this.$emit('hideYearsLabel', false);
-      this.hideYearsLabel();
-    },
-    emitHideYearsLabel() {
-      this.$emit('hideYearsLabel', true);
-    },
-    emitTechYears(years: number) {
-      this.$emit('hideYearsLabel', false);
-      this.$emit('setTechYears', years);
-    },
-    emitMousePosition(positions: { x: number, y: number }) {
-      this.$emit('updateMousePosition', positions);
+      // this.$emit('hideYearsLabel', false);
+      // this.hideYearsLabel();
     },
   },
+  computed: {
+    getLabelDivStyles(): { left: string, top: string } {
+      return {
+        left: `${this.xPosition}px`,
+        top: `${this.yPosition}px`,
+      };
+    },
+  }
 });
 </script>
 
@@ -131,6 +144,10 @@ export default defineComponent({
         &::after {
           opacity: 1;
         }
+
+        .floating-years__label {
+          opacity: 1;
+        }
       }
 
       img {
@@ -158,6 +175,40 @@ export default defineComponent({
           @include screen-gt($size-desktop) {
             font-size: 32px;
           }
+        }
+      }
+
+      .floating-years__label {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+        position: absolute;
+        color: $off-black;
+        background-color: $off-white;
+        min-width: 70px;
+        min-height: 40px;
+        width: 8vw;
+        height: 9vw;
+        pointer-events: none;
+        border-radius: 5px;
+        opacity: 0;
+        transition: opacity 0.4s;
+
+        @include screen-gt($size-tablet) {
+          min-width: 100px;
+          min-height: 70px;
+          width: 1.9vw;
+
+          @include screen-gt($size-desktop) {
+            width: 125px;
+            height: 90px;
+          }
+        }
+
+        p {
+          line-height: 0.7em;
         }
       }
     }
