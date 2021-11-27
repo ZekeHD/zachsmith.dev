@@ -1,24 +1,5 @@
-# websiteapp
+# zachsmith.dev
 
-## Project setup
-```
-npm install
-```
+Sure, if you wanna clone it, you can. Otherwise, take a look and get in touch if my skills are what you're looking for.
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+<https://zachsmith.dev>
