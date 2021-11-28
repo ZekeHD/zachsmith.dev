@@ -86,6 +86,7 @@ body {
       width: 95%;
       margin: 0 auto 7vh;
       z-index: 1;
+      max-width: 2100px;
 
       @include screen-gt($size-phablet) {
         width: 85%;
