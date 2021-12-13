@@ -1,5 +1,6 @@
 interface Proficiency {
-  title: string;
+  title?: string;
+  type: ProficiencyType,
   techs: {
     name: string;
     iconName: string;
@@ -8,9 +9,15 @@ interface Proficiency {
   }[];
 };
 
-const proficiencies: Proficiency[] = [
+enum ProficiencyType {
+  Dev,
+  Editing,
+}
+
+const devProficiencies: Proficiency[] = [
   {
     title: 'JS Frameworks',
+    type: ProficiencyType.Dev,
     techs: [
       {
         name: 'Vue.js',
@@ -27,6 +34,7 @@ const proficiencies: Proficiency[] = [
   },
   {
     title: 'Web Technologies/Tools',
+    type: ProficiencyType.Dev,
     techs: [
       {
         name: 'HTML',
@@ -73,6 +81,7 @@ const proficiencies: Proficiency[] = [
   },
   {
     title: 'Integrations/Cloud',
+    type: ProficiencyType.Dev,
     techs: [
       {
         name: 'AWS',
@@ -98,4 +107,37 @@ const proficiencies: Proficiency[] = [
   }
 ];
 
-export { proficiencies, Proficiency };
+const editingProficiencies: Proficiency[] = [
+  {
+    type: ProficiencyType.Editing,
+    techs: [
+      {
+        name: 'Adobe Premiere Pro',
+        iconName: 'premiere.svg',
+        years: 4,
+      },
+      {
+        name: 'Adobe After Effects',
+        iconName: 'aftereffects.svg',
+        years: 4,
+      },
+      {
+        name: 'Adobe Photoshop',
+        iconName: 'photoshop.svg',
+        years: 3,
+      },
+      {
+        name: 'Adobe Audition',
+        iconName: 'audition.svg',
+        years: 2,
+      },
+      {
+        name: 'Sony Vegas Pro',
+        iconName: 'vegas.png',
+        years: 10,
+      },
+    ]
+  },
+]
+
+export { devProficiencies, editingProficiencies, Proficiency, ProficiencyType };

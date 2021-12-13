@@ -21,9 +21,8 @@
   <div class="description-sentences left-align">
     <p>
       Currently based out of <span class="emphasis-red">Augusta, GA</span>
-      and doing <span class="emphasis-red">full-stack development</span>
-      for enterprise-level clients at
-      <a href="https://ruralsourcing.com" target="_blank" class="link-underline">Rural Sourcing, Inc.</a>
+      and doing <span class="emphasis-red">front-end UI development</span>
+      for <a href="https://jumpcloud.com" target="_blank" class="link-underline">JumpCloud</a>
     </p>
   </div>
 </div>
