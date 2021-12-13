@@ -2,10 +2,10 @@
 <footer class="footer-container">
   <p>Get in touch:</p>
   <a href="https://www.linkedin.com/in/zachsmith258/" target="_blank">
-    <img src="@/assets/icons/linkedin.png" draggable="false" alt="Zach Smith LinkedIn link">
+    <img src="@/assets/icons/dev-icons/linkedin.png" draggable="false" alt="Zach Smith LinkedIn link">
   </a>
   <a href="https://github.com/ZekeHD" target="_blank">
-    <img src="@/assets/icons/git.svg" draggable="false" alt="Zach Smith Github link">
+    <img src="@/assets/icons/dev-icons/git.svg" draggable="false" alt="Zach Smith Github link">
   </a>
 </footer>
 </template>

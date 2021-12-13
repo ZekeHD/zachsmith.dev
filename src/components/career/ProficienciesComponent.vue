@@ -1,6 +1,6 @@
 <template>
 <div class="proficiencies__container">
-  <p class="title emphasis-red">{{ title }}</p>
+  <p v-if="title" class="title emphasis-red">{{ title }}</p>
   <ul v-if="techs">
     <li v-for="tech in techs" :key="tech.name"
         @mouseenter="emitTechYears(tech.years)"
@@ -19,12 +19,13 @@
 import { defineComponent, PropType } from 'vue';
 import debounce from 'lodash.debounce';
 
-import { Proficiency } from '../../shared/proficiencies';
+import { Proficiency, ProficiencyType } from '../../shared/proficiencies';
 
 export default defineComponent({
   name: 'ProficienciesComponent',
   props: {
     title: String as PropType<Proficiency['title']>,
+    type: Object as PropType<ProficiencyType>,
     techs: Object as PropType<Proficiency['techs']>,
   },
   data: () => ({
@@ -33,14 +34,14 @@ export default defineComponent({
   created() {
     this.debouncedHideYearsLabel = debounce(() => { this.$emit('hideYearsLabel', true) }, 1500);
 
-    const touchPoints = navigator.maxTouchPoints ?? 0;
-    if (touchPoints > 0) {
+    const deviceTouchPoints = navigator.maxTouchPoints ?? 0;
+    if (deviceTouchPoints > 0) {
       window.addEventListener('scroll', this.emitHideYearsLabel);
     }
   },
   methods: {
     getIconPath(iconFileName: string): string {
-      return require(`@/assets/icons/${iconFileName}`);
+      return require(`@/assets/icons/${this.iconFolderName}/${iconFileName}`);
     },
     updateMousePosition(event: MouseEvent) {
       this.emitMousePosition({ x: event.clientX, y: event.clientY });
@@ -60,6 +61,11 @@ export default defineComponent({
       this.$emit('updateMousePosition', positions);
     },
   },
+  computed: {
+    iconFolderName() {
+      return this.type === ProficiencyType.Dev ? 'dev-icons' : 'editing-icons';
+    },
+  }
 });
 </script>
 
@@ -75,7 +81,6 @@ export default defineComponent({
   .title {
     text-align: center;
     font-size: calc(25px + 1.5vw);
-    margin-bottom: 5px;
     text-decoration: underline;
 
     @include screen-gt($size-tablet) {
@@ -92,6 +97,7 @@ export default defineComponent({
     flex-direction: row;
     justify-content: space-evenly;
     flex-wrap: wrap;
+    margin-top: 10px;
     padding: 0;
     column-gap: 10px;
     row-gap: 30px;
