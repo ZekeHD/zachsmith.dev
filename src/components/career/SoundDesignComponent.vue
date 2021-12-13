@@ -1,4 +1,5 @@
 <template>
+<div class="video__container">
   <div class="video__wrapper">
     <p class="title">{{ title }}</p>
     <div
@@ -16,7 +17,7 @@
     </div>
   </div>
   <p class="description left-align">{{ description }}</p>
-  <hr v-if="!lastElement">
+</div>
 </template>
 
 <script lang="ts">
@@ -43,7 +44,6 @@ export default defineComponent({
     url: String as PropType<Video['url']>,
     title: String as PropType<Video['title']>,
     description: String as PropType<Video['description']>,
-    lastElement: Boolean,
   },
   data: () => ({
     displayTitles: false,
@@ -61,22 +61,26 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.video__wrapper {
-  margin: auto;
-  margin-bottom: 15px;
-  width: 80vw;
-  max-width: 900px;
+.video__container {
+  margin-bottom: 35px;
 
-  .title {
-    text-decoration: underline;
-  }
-
-  .video-player__container {
+  .video__wrapper {
     margin: auto;
-  }
-}
+    margin-bottom: 15px;
+    width: 80vw;
+    max-width: 900px;
 
-.description {
-  line-height: 1.2em;
+    .title {
+      text-decoration: underline;
+    }
+
+    .video-player__container {
+      margin: auto;
+    }
+  }
+
+  .description {
+    line-height: 1.2em;
+  }
 }
 </style>
