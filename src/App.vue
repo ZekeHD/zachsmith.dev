@@ -51,6 +51,7 @@ body {
   color: $off-white;
   background-color: $off-black;
   user-select: none;
+  overflow-y: scroll;
 
   @include screen-gt($size-tablet) {
     font-size: calc(28px + 1.5vw);
