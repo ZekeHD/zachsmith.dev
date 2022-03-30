@@ -51,7 +51,8 @@ body {
   color: $off-white;
   background-color: $off-black;
   user-select: none;
-  overflow-y: scroll;
+  width: 100vw;
+  overflow-x: hidden;
 
   @include screen-gt($size-tablet) {
     font-size: calc(28px + 1.5vw);
@@ -85,15 +86,20 @@ body {
     .content {
       flex-grow: 1;
       width: 95%;
-      margin: 0 auto 7vh;
+      margin: 0 auto 0.5vh;
       z-index: 1;
       max-width: 2100px;
 
       @include screen-gt($size-phablet) {
         width: 85%;
+        margin-bottom: 3vh;
       }
 
       @include screen-gt($size-tablet) {
+        margin-bottom: 7vh;
+      }
+
+      @include screen-gt(1200px) {
         margin-bottom: 12vh;
       }
 
