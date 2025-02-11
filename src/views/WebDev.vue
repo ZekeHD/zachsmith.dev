@@ -1,52 +1,65 @@
 <template>
-<div>
-  <div class="descriptions left-align">
-    <span class="emphasis-red">Better.<br></span>
-    <span class="emphasis-red">Faster.<br></span>
-    <span class="emphasis-red">Stronger UI/UX.<br></span>
+  <div>
+    <div class="descriptions left-align emphasis-red">
+      <p>Mastery at crafting clean, maintainable, and testable web components.</p>
+      <p>Focus on best practices and team collaboration.</p>
+    </div>
+
+    <div class="description-sentences left-align">
+      <p>I love creating easy-to-use and attractive user experiences.</p>
+      <p>Let's get stuff done.</p>
+    </div>
+    
+    <hr>
+
+    <div class="left-align">
+      Click <a href="ZS_Resume_Feb2025.pdf" download class="link-underline">here</a> to download my resume!
+    </div>
+
+    <hr>
+    <p class="section-title all-caps emphasis-red left-align">proficiencies</p>
+
+    <proficiencies-component
+      v-for="proficiency in devProficiencies"
+      :key="proficiency.title"
+      :title="proficiency.title"
+      :type="ProficiencyType.Dev"
+      :techs="proficiency.techs"
+      @updateMousePosition="updateMousePosition"
+      @hideYearsLabel="(value) => { hideLabelDiv = value }"
+      @setTechYears="(value) => { techYears = value }"
+    ></proficiencies-component>
+
+    <hr>
+    <p class="section-title emphasis-red all-caps left-align">professional experience</p>
+
+    <experience-component
+      v-for="employer in employers"
+      :key="employer.name"
+      :name="employer.name"
+      :term-length="employer.termLength"
+      :descriptions="employer.descriptions"
+      :role="employer.role"
+      :url="employer.name"
+    ></experience-component>
+
+    <hr>
+    <p class="section-title emphasis-red all-caps left-align">education</p>
+
+    <experience-component
+      v-for="education in educations"
+      :key="education.name"
+      :name="education.name"
+      :term-length="education.termLength"
+      :descriptions="education.descriptions"
+    ></experience-component>
+
+    <floating-label-component
+      :hide="hideLabelDiv"
+      :years-amount="techYears"
+      :mouse-position="labelDivStyles"
+    ></floating-label-component>
   </div>
-  <div class="description-sentences left-align">
-    <p>I love creating easy-to-use and attractive user experiences.</p>
-    <p>Let's get stuff done.</p>
-  </div>
-  <hr>
-  <p class="section-title all-caps emphasis-red left-align">proficiencies</p>
-  <proficiencies-component
-    v-for="proficiency in devProficiencies"
-    :key="proficiency.title"
-    :title="proficiency.title"
-    :type="ProficiencyType.Dev"
-    :techs="proficiency.techs"
-    @updateMousePosition="updateMousePosition"
-    @hideYearsLabel="(value) => { hideLabelDiv = value }"
-    @setTechYears="(value) => { techYears = value }"
-  ></proficiencies-component>
-  <hr>
-  <p class="section-title emphasis-red all-caps left-align">professional experience</p>
-  <experience-component
-    v-for="employer in employers"
-    :key="employer.name"
-    :name="employer.name"
-    :term-length="employer.termLength"
-    :descriptions="employer.descriptions"
-    :role="employer.role"
-    :url="employer.name"
-  ></experience-component>
-  <hr>
-  <p class="section-title emphasis-red all-caps left-align">education</p>
-  <experience-component
-    v-for="education in educations"
-    :key="education.name"
-    :name="education.name"
-    :term-length="education.termLength"
-    :descriptions="education.descriptions"
-  ></experience-component>
-  <floating-label-component
-    :hide="hideLabelDiv"
-    :years-amount="techYears"
-    :mouse-position="labelDivStyles"
-  ></floating-label-component>
-</div>
 </template>
 
 <script lang="ts">
