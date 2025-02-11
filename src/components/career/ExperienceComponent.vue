@@ -3,9 +3,9 @@
   <div class="name-term__container">
     <span class="left-align">
       <p>{{ name }}</p>
-      <p class="role" v-if="role">{{ role }}</p>
+      <p class="role">{{ role }}</p>
     </span>
-    <span class="term-length left-align">{{ termLength }}</span>
+    <span v-if="termLength" class="term-length left-align">{{ termLength }}</span>
   </div>
   <div v-if="descriptions" class="description__container left-align">
     <p v-for="(description, i) in descriptions" :key="i">{{ description }}</p>
@@ -36,6 +36,10 @@ export default defineComponent({
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
+    .role {
+      font-size: calc(16px + 1.4vw);
+    }
     
     @media screen and (min-width: 400px) {
       flex-direction: row;
@@ -49,7 +53,7 @@ export default defineComponent({
   }
 
   .description__container {
-    font-size: calc(16px + 1.5vw);
+    font-size: calc(12px + 1.5vw);
     font-weight: 200;
     margin-left: 12px;
     line-height: 1.2em;

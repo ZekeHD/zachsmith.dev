@@ -50,7 +50,6 @@ body {
   text-align: center;
   color: $off-white;
   background-color: $off-black;
-  user-select: none;
   width: 100vw;
   overflow-x: hidden;
 
