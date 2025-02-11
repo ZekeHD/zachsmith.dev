@@ -13,7 +13,7 @@
     <hr>
 
     <div class="left-align">
-      Click <a href="ZS_Resume_Feb2025.pdf" download class="link-underline">here</a> to download my resume!
+      <a href="ZS_Resume_Feb2025.pdf" download class="link-underline">Click here</a> to download my resume!
     </div>
 
     <hr>
