@@ -9,6 +9,7 @@
         <span class="emphasis-red">sound designer</span>
         <span class="emphasis-red">professional bad guitar player</span>
       </div>
+
       <div class="portrait__container">
         <div class="portrait-wrapper" :style="cssProps" aria-label="Portrait image of Zach Smith"></div>
         <span class="portrait-name">
@@ -18,11 +19,27 @@
       </div>
     </div>
   </div>
+
   <div class="description-sentences left-align">
     <p>
-      Currently based out of <span class="emphasis-red">Augusta, GA</span>
-      and doing <span class="emphasis-red">API/UI development</span>
+      Based out of Augusta, GA and doing
+      <span class="emphasis-red">API/UI development</span>
       for <a href="https://jumpcloud.com" target="_blank" class="link-underline">JumpCloud</a>
+    </p>
+  </div>
+
+  <hr>
+
+  <div class="description-sentences left-align margin-top">
+    <p>
+      Currently <span class="emphasis-red">looking for new opportunities</span>
+      in a <span class="emphasis-red"><u>Senior Software Engineer role</u></span>.
+    </p>
+
+    <p>
+      Check out my
+      <router-link to="/webdev" class="link-underline">FULL STACK DEV</router-link>
+      page for more info!
     </p>
   </div>
 </div>
@@ -115,5 +132,13 @@ export default defineComponent({
 .welcome {
   line-height: 1.2em;
   margin-bottom: 30px;
+}
+
+.margin-top {
+  margin-top: 32px;
+}
+
+.emphasis-blue {
+  color: #3F6FAE;
 }
 </style>
