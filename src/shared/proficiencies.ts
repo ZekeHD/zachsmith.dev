@@ -23,7 +23,7 @@ const devProficiencies: Proficiency[] = [
         name: 'Vue.js',
         iconName: 'vue.svg',
         note: '(my fave \u2764)',
-        years: 2,
+        years: 5,
       },
       {
         name: 'Angular/JS',
@@ -33,49 +33,74 @@ const devProficiencies: Proficiency[] = [
     ]
   },
   {
+    title: 'Programming Languages',
+    type: ProficiencyType.Dev,
+    techs: [
+      {
+        name: 'Node.js',
+        iconName: 'node.svg',
+        years: 7,
+      },
+      {
+        name: 'JavaScript',
+        iconName: 'javascript.png',
+        years: 10,
+      },
+      {
+        name: 'TypeScript',
+        iconName: 'typescript.svg',
+        years: 4,
+      },
+      {
+        name: 'Java',
+        iconName: 'java.svg',
+        years: 1,
+      }
+    ],
+  },
+  {
     title: 'Web Technologies/Tools',
     type: ProficiencyType.Dev,
     techs: [
       {
         name: 'HTML',
         iconName: 'html.svg',
-        years: 6,
+        years: 10,
       },
       {
         name: 'CSS',
         iconName: 'css.svg',
-        years: 6,
+        years: 10,
       },
       {
-        name: 'JavaScript',
-        iconName: 'javascript.png',
-        years: 5,
-      },
-      {
-        name: 'TypeScript',
-        iconName: 'typescript.svg',
-        years: 2,
-
-      },
-      {
-        name: 'SASS/SCSS',
-        iconName: 'sass.svg',
-        years: 3,
-      },
-      {
-        name: 'NodeJS',
-        iconName: 'node.svg',
+        name: 'Docker',
+        iconName: 'docker.png',
         years: 4,
       },
       {
-        name: 'Bitbucket',
-        iconName: 'bitbucket.svg',
+        name: 'gRPC',
+        iconName: 'grpc.png',
+        years: 2,
+      },
+      {
+        name: 'Cypress',
+        iconName: 'cypress.svg',
+        years: 2,
+      },
+      {
+        name: 'Swagger',
+        iconName: 'swagger.png',
         years: 3,
       },
       {
         name: 'Github',
         iconName: 'git.svg',
-        years: 5,
+        years: 10,
+      },
+      {
+        name: 'SASS/SCSS',
+        iconName: 'sass.svg',
+        years: 3,
       },
     ]
   },
@@ -86,12 +111,12 @@ const devProficiencies: Proficiency[] = [
       {
         name: 'AWS',
         iconName: 'aws.svg',
-        years: 2,
+        years: 5,
       },
       {
         name: 'MongoDB',
         iconName: 'mongodb.svg',
-        years: 2,
+        years: 5,
       },
       {
         name: 'Dialogflow',
