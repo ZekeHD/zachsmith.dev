@@ -114,10 +114,11 @@ export default defineComponent({
       position: relative;
       padding: 10px 25px 0;
       display: inline-block;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
       border-radius: 10px;
       transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
       will-change: transform;
+      background: $off-black;
       
       @include screen-gt($size-tablet) {
         padding: 15px 40px 0;

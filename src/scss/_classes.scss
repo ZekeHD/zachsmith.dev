@@ -45,7 +45,11 @@
 .descriptions {
   font-weight: 400;
   line-height: 1em;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
+
+  > * {
+    margin-bottom: 3px
+  }
 
   .titles {
     display: flex;
@@ -55,7 +59,6 @@
 
 .description-sentences {
   p {
-    font-size: 40px;
     line-height: 1.2em;
     margin-bottom: 8px;
   }
