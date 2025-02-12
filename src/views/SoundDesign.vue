@@ -1,9 +1,9 @@
 <template>
 <div>
   <div class="descriptions left-align">
-    <span class="emphasis-red">10+ years editing experience.<br></span>
-    <span class="emphasis-red">5+ years sound design experience.<br></span>
-    <span class="emphasis-red">Ready to help you create your soundscape.<br></span>
+    <p class="emphasis-red">10+ years editing experience.</p>
+    <p class="emphasis-red">5+ years sound design experience.</p>
+    <p class="emphasis-red">Ready to help you create your soundscape.</p>
   </div>
   <div class="description-sentences left-align">
     <p>Let's work together on your next passion project.</p>

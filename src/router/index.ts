@@ -27,4 +27,7 @@ export default createRouter({
       component: Home,
     }
   ],
+  scrollBehavior() {
+    window.setTimeout(() => { window.scrollTo(0, 0); }, 200);
+  },
 });
