@@ -189,7 +189,7 @@ export default defineComponent({
 
   .svg-container {
     text-align: center;
-    width: 35px;
+    width: 4.2vw;
 
     svg {
       fill: $off-white;
