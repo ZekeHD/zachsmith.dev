@@ -49,9 +49,17 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: $off-white;
-  background-color: $off-black;
   width: 100vw;
   overflow-x: hidden;
+
+  // mask-image: linear-gradient(to bottom, black, transparent);
+
+  background-color: $off-black;
+  background-image: radial-gradient(#595959 0.75px, transparent 0.75px),
+    radial-gradient(#6f6f6f 0.75px, $off-black 0.75px);
+
+  background-size: 30px 30px;
+  background-position: 0 0, 15px 15px;
 
   @include screen-gt($size-tablet) {
     font-size: calc(28px + 1.5vw);
@@ -80,6 +88,7 @@ body {
     align-items: center;
     justify-content: space-around;
     margin: auto;
+    margin-bottom: 24px;
     box-sizing: border-box;
 
     .content {
