@@ -25,9 +25,17 @@ export default defineComponent({
   flex-direction: row;
   z-index: 0;
 
-  a {
-    display: inline-block;
-    
+  @include screen-gt($size-tablet) {
+    @include screen-gt($size-desktop) {
+      font-size: 32px;
+    }
+  }
+
+  p {
+    margin-right: 12px;
+  }
+
+  img {
     height: calc(18px + 1.5vw);
     margin-right: 10px;
 
@@ -38,21 +46,6 @@ export default defineComponent({
         height: 40px;
       }
     }
-
-    img {
-      width: 100%;
-      height: 100%;
-    }
-  }
-
-  @include screen-gt($size-tablet) {
-    @include screen-gt($size-desktop) {
-      font-size: 32px;
-    }
-  }
-
-  p {
-    margin-right: 12px;
   }
 }
 </style>
