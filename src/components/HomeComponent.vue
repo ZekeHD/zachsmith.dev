@@ -48,7 +48,7 @@
   <div class="description-sentences left-align margin-top">
     <p>
       Currently <span class="emphasis-red">looking for new opportunities</span>
-      in a <span class="emphasis-red"><u>Senior Software Engineer role</u></span>.
+      in a <span class="emphasis-red"><u>Senior Software Engineer</u> role</span>.
     </p>
 
     <p>
@@ -144,11 +144,13 @@ export default defineComponent({
       background-position: center;
       background-repeat: no-repeat;
       background-size: cover;
+      margin-right: 10px;
 
       @include screen-gt($size-phablet) {
         width: 23vw;
         height: 23vw;
         margin-bottom: 10px;
+        margin-right: 0;
 
         @include screen-gt($size-tablet) {
           max-width: 180px;
