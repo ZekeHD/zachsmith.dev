@@ -52,6 +52,16 @@ const devProficiencies: Proficiency[] = [
         years: 4,
       },
       {
+        name: 'Python',
+        iconName: 'python.png',
+        years: 7,
+      },
+      {
+        name: 'C#',
+        iconName: 'c-sharp.svg',
+        years: 2,
+      },
+      {
         name: 'Java',
         iconName: 'java.svg',
         years: 1,
