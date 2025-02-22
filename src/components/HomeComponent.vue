@@ -71,6 +71,10 @@ type CssProps = {
 
 export default defineComponent({
   name: 'HomeComponent',
+  mounted() {
+    document.title = 'ZS | Home';
+  },
+
   computed: {
     portraitPath: () => require('@/assets/pictures/zach.jpg'),
     cssProps(): CssProps {

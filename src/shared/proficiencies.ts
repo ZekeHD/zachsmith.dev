@@ -103,6 +103,11 @@ const devProficiencies: Proficiency[] = [
         years: 3,
       },
       {
+        name: 'PagerDuty',
+        iconName: 'pagerduty.svg',
+        years: 2,
+      },
+      {
         name: 'Github',
         iconName: 'git.svg',
         years: 10,

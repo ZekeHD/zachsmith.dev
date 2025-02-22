@@ -55,7 +55,12 @@ export default defineComponent({
     ProficienciesComponent,
     FloatingLabelComponent,
   },
+  mounted() {
+    document.title = 'ZS | Sound Designer';
+  },
+
   setup: () => ({ ...useLabelDivSetup() }),
+
   computed: {
     editingProficiencies: () => editingProficiencies,
     ProficiencyType: () => ProficiencyType,

@@ -3,7 +3,7 @@ import { Experience } from './interfaces/Experience';
 export const employers: Experience[] = [
   {
     name: 'JumpCloud',
-    termLength: 'December 2021 - Present',
+    termLength: 'December 2021 - February 2025',
     role: 'Software Engineer II - III',
     url: 'https://jumpcloud.com',
     descriptions: [
@@ -12,12 +12,12 @@ JumpCloud provides IT administrators and their organizations with an all-in-one 
 user access/identity, resource, and device management, all from a single platform, and is used by \
 over 150,000 organizations.`,
       `\
-I have worked all over the application, but most recently I have led the effort to transform our \
+I worked all over the application, but most recently I have led the effort to transform our \
 legacy List/Search APIs by implementing Cypress and functional test suites that define current behavior \
 and expand its breadth of scope and functionality, making it more straightforward and easy to use for customers - \
 becoming an SME in JumpCloud API and RPC development.`,
       `\
-I have also heavily contributed to the front-end repositories, including being the Feature Lead on multiple \
+I also heavily contributed to the front-end repositories, including being the Feature Lead on multiple \
 new features in our front-end monorepo and contributing to our UI Design System, which allows for seamless \
 component integration across all of our Vue repositories.`
     ],
