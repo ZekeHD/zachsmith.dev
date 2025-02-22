@@ -81,7 +81,12 @@ export default defineComponent({
     ProficienciesComponent,
     FloatingLabelComponent
   },
+  mounted() {
+    document.title = 'ZS | Web Engineer';
+  },
+
   setup: () => ({ ...useLabelDivSetup() }),
+
   computed: {
     ProficiencyType: () => ProficiencyType,
     devProficiencies: () => devProficiencies,
