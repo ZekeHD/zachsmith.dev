@@ -17,7 +17,14 @@
     </div>
 
     <hr>
-    <p class="section-title all-caps emphasis-red left-align">proficiencies</p>
+    <div class="proficiencies-text">
+      <span class="section-title all-caps emphasis-red left-align">proficiencies</span>
+
+      <template v-if="showTouchLabel">
+        <span>(tap items for more!)</span>
+        <CurvyArrow pointDown />
+      </template>
+    </div>
 
     <proficiencies-component
       v-for="proficiency in devProficiencies"
@@ -28,7 +35,7 @@
       @updateMousePosition="updateMousePosition"
       @hideYearsLabel="(value) => { hideLabelDiv = value }"
       @setTechYears="(value) => { techYears = value }"
-    ></proficiencies-component>
+    />
 
     <hr>
     <p class="section-title emphasis-red all-caps left-align">professional experience</p>
@@ -41,7 +48,7 @@
       :descriptions="employer.descriptions"
       :role="employer.role"
       :url="employer.name"
-    ></experience-component>
+    />
 
     <hr>
     <p class="section-title emphasis-red all-caps left-align">education</p>
@@ -52,13 +59,13 @@
       :name="education.name"
       :term-length="education.termLength"
       :descriptions="education.descriptions"
-    ></experience-component>
+    />
 
     <floating-label-component
       :hide="hideLabelDiv"
       :years-amount="techYears"
       :mouse-position="labelDivStyles"
-    ></floating-label-component>
+    />
   </div>
 </template>
 
@@ -72,26 +79,38 @@ import { employers } from '../shared/employers';
 import { educations } from '../shared/educations';
 import { devProficiencies, ProficiencyType } from '../shared/proficiencies';
 import useLabelDivSetup from '../shared/composables/useLabelDivSetup';
+import useTouchLabelSetup from '@/shared/composables/useTouchLabelSetup';
 import FloatingLabelComponent from '../components/helpers/FloatingLabelComponent.vue';
+import CurvyArrow from '@/components/helpers/CurvyArrow.vue';
 
 export default defineComponent({
-  name: 'WebDevView',
+  name: 'WebDev',
+
   components: {
+    CurvyArrow,
     ExperienceComponent,
     ProficienciesComponent,
     FloatingLabelComponent
   },
+
+  data: () => ({
+    showTouchLabel: false,
+  }),
+
   mounted() {
     document.title = 'ZS | Web Engineer';
   },
 
-  setup: () => ({ ...useLabelDivSetup() }),
+  setup: () => ({
+    ...useLabelDivSetup(),
+    ...useTouchLabelSetup(),
+  }),
 
   computed: {
     ProficiencyType: () => ProficiencyType,
     devProficiencies: () => devProficiencies,
     employers: () => employers,
     educations: () => educations,
-  }
+  },
 });
 </script>
