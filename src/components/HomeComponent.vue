@@ -29,7 +29,7 @@
         <div class="portrait-wrapper" :style="cssProps" aria-label="Portrait image of Zach Smith"></div>
         <span class="portrait-name">
           <p>Zach Smith</p>
-          <svg class="arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 155.139 155.139" xml:space="preserve"><path d="M40.56 45.42H12.384L57.804 0l45.408 45.42h-28.51c4.046 53.517 31.917 96.753 68.052 107.266-5.513 1.599-11.224 2.452-17.077 2.452-44.143.001-80.475-48.027-85.117-109.718"/></svg>
+          <CurvyArrow />
         </span>
       </div>
     </div>
@@ -63,6 +63,8 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 
+import CurvyArrow from './helpers/CurvyArrow.vue';
+
 type CssProps = {
   backgroundImage: string,
   backgroundPosition: string,
@@ -75,12 +77,21 @@ export default defineComponent({
     document.title = 'ZS | Home';
   },
 
+  components: {
+    CurvyArrow,
+  },
+
   computed: {
     portraitPath: () => require('@/assets/pictures/zach.jpg'),
+
     cssProps(): CssProps {
+      const backgroundPosition = window.innerWidth < 450
+        ? '0 -4vw'
+        : '0 -3vh';
+
       return {
         backgroundImage: `url(${this.portraitPath})`,
-        backgroundPosition: '0 -3vh',
+        backgroundPosition,
         backgroundSize: '90%',
       };
     },
@@ -132,10 +143,15 @@ export default defineComponent({
     align-items: center;
     position: absolute;
     right: 0;
-    bottom: 0;
+    bottom: 7vw;
+
+    @include screen-gt($size-phablet) {
+      bottom: 3vw;
+    }
 
     @include screen-gt($size-tablet) {
       right: 3vw;
+      bottom: 0;
     }
 
     .portrait-wrapper {
@@ -173,13 +189,6 @@ export default defineComponent({
       display: none;
       flex-direction: row;
       right: 0;
-
-      .arrow {
-        height: 0.5em;
-        min-height: 15px;
-        transform: scaleX(-1) rotate(30deg);
-        fill: $off-white;
-      }
     }
 
     @include screen-gt($size-phablet) {

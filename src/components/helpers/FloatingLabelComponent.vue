@@ -12,7 +12,7 @@ export default defineComponent({
   name: 'FloatingLabelComponent',
   props: {
     hide: Boolean,
-    mousePosition: Object as PropType<{ x: number, y: number }>,
+    mousePosition: Object as PropType<{ left: string, top: string }>,
     yearsAmount: Number,
   },
 });

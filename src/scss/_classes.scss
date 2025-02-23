@@ -82,3 +82,9 @@
 .all-caps {
   text-transform: uppercase;
 }
+
+.proficiencies-text {
+  display: flex;
+  align-items: center;
+  column-gap: 8px;
+}
