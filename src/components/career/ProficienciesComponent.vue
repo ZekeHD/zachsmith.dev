@@ -1,21 +1,27 @@
 <template>
-<div class="proficiencies__container">
-  <p v-if="title" class="title emphasis-red">{{ title }}</p>
-  <ul v-if="techs">
-    <li 
-      v-for="tech in techs"
-      :key="tech.name"
-      @mouseenter="emitTechYears(tech.years)"
-      @mousemove="updateMousePosition"
-      @mouseleave="emitHideYearsLabel"
-      v-touch="handleTouch(tech.years)"
-    >
-      <img :src="getIconPath(tech.iconName)" class="tech__icon" draggable="false" :alt="tech.name + ' icon'">
-      <p class="name">{{ tech.name }}</p>
-      <p class="note" v-if="tech.note">{{ tech.note }}</p>
-    </li>
-  </ul>
-</div>
+  <div class="proficiencies__container">
+    <p v-if="title" class="title emphasis-red">{{ title }}</p>
+    <ul v-if="techs">
+      <li
+        v-for="tech in techs"
+        :key="tech.name"
+        @mouseenter="emitTechYears(tech.years)"
+        @mousemove="updateMousePosition"
+        @mouseleave="emitHideYearsLabel"
+        v-touch="handleTouch(tech.years)"
+      >
+        <img
+          :src="getIconPath(tech.iconName)"
+          class="tech__icon"
+          draggable="false"
+          :alt="tech.name + ' icon'"
+        />
+
+        <p class="name">{{ tech.name }}</p>
+        <p class="note" v-if="tech.note">{{ tech.note }}</p>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script lang="ts">

@@ -1,21 +1,17 @@
 <template>
-<div class="page-container">
-  <div class="content">
-    <header-component :condense-header="condenseHeader"></header-component>
-    <main>
-      <router-view v-slot="{ Component }">
-        <transition
-          name="fade"
-          mode="out-in"
-          appear
-        >
-          <component :is="Component"></component>
-        </transition>
-      </router-view>
-    </main>
+  <div class="page-container">
+    <div class="content">
+      <header-component :condense-header="condenseHeader"></header-component>
+      <main>
+        <router-view v-slot="{ Component }">
+          <transition name="fade" mode="out-in" appear>
+            <component :is="Component"></component>
+          </transition>
+        </router-view>
+      </main>
+    </div>
+    <footer-component id="footer"></footer-component>
   </div>
-  <footer-component id="footer"></footer-component>
-</div>
 </template>
 
 <script lang="ts">
@@ -90,6 +86,7 @@ body {
     margin: auto;
     margin-bottom: 24px;
     box-sizing: border-box;
+    height: 100vh;
 
     .content {
       flex-grow: 1;

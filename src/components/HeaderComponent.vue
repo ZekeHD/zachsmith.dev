@@ -1,30 +1,40 @@
 <template>
-<header class="heading left-align" :class="{ 'hide-hello': condenseHeader }">
-  <span class="hello-statement">Hey there, I'm&nbsp;</span>
-  <nav class="links-container">
-    <ul class="links-container__list">
-      <li class="home-text emphasis-red">
-        <router-link class="home-text__link" to="/"><span class="link-underline">Zach Smith.</span></router-link>
-        <span class="home-text__text">Zach Smith.</span>
-      </li>
-      <template class="extra-links">
-        <li>
-          &nbsp;|&nbsp;&nbsp;<router-link to="/webdev" class="link-underline all-caps">full stack dev</router-link>&nbsp;&nbsp;|
+  <header class="heading left-align" :class="{ 'hide-hello': condenseHeader }">
+    <span class="hello-statement">Hey there, I'm&nbsp;</span>
+    <nav class="links-container">
+      <ul class="links-container__list">
+        <li class="home-text emphasis-red">
+          <router-link class="home-text__link" to="/"
+            ><span class="link-underline">Zach Smith.</span></router-link
+          >
+          <span class="home-text__text">Zach Smith.</span>
         </li>
-        <li>
-          &nbsp;&nbsp;<router-link to="/sounddesign" class="link-underline all-caps">sound design</router-link>
-        </li>
-      </template>
-    </ul>
-  </nav>
-</header>
+        <template class="extra-links">
+          <li>
+            &nbsp;|&nbsp;&nbsp;<router-link
+              to="/webdev"
+              class="link-underline all-caps"
+              >full stack dev</router-link
+            >&nbsp;&nbsp;|
+          </li>
+          <li>
+            &nbsp;&nbsp;<router-link
+              to="/sounddesign"
+              class="link-underline all-caps"
+              >sound design</router-link
+            >
+          </li>
+        </template>
+      </ul>
+    </nav>
+  </header>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: 'HeaderComponent',
+  name: "HeaderComponent",
   props: {
     condenseHeader: Boolean,
   },

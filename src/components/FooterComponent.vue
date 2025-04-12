@@ -1,13 +1,13 @@
 <template>
-<footer class="footer-container">
-  <p>Get in touch:</p>
-  <a href="https://www.linkedin.com/in/zachsmith258/" target="_blank">
-    <img src="@/assets/icons/dev-icons/linkedin.png" draggable="false" alt="Zach Smith LinkedIn link">
-  </a>
-  <a href="https://github.com/ZekeHD" target="_blank">
-    <img src="@/assets/icons/dev-icons/git.svg" draggable="false" alt="Zach Smith Github link">
-  </a>
-</footer>
+  <footer class="footer-container">
+    <p>Get in touch:</p>
+    <a href="https://www.linkedin.com/in/zachsmith258/" target="_blank">
+      <img src="@/assets/icons/dev-icons/linkedin.png" draggable="false" alt="Zach Smith LinkedIn link">
+    </a>
+    <a href="https://github.com/ZekeHD" target="_blank">
+      <img src="@/assets/icons/dev-icons/git.svg" draggable="false" alt="Zach Smith Github link">
+    </a>
+  </footer>
 </template>
 
 <script lang="ts">
@@ -24,6 +24,7 @@ export default defineComponent({
   align-items: center;
   flex-direction: row;
   z-index: 0;
+  padding-bottom: 50px;
 
   @include screen-gt($size-tablet) {
     @include screen-gt($size-desktop) {
