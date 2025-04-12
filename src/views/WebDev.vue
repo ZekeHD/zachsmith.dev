@@ -1,7 +1,9 @@
 <template>
   <div>
     <div class="descriptions left-align emphasis-red">
-      <p>Mastery at crafting clean, maintainable, and testable web components.</p>
+      <p>
+        Mastery at crafting clean, maintainable, and testable web components.
+      </p>
       <p>Focus on best practices and team collaboration.</p>
     </div>
 
@@ -9,16 +11,12 @@
       <p>I love creating easy-to-use and attractive user experiences.</p>
       <p>Let's get stuff done.</p>
     </div>
-    
-    <hr>
 
-    <div class="left-align">
-      <a href="ZS_Resume_Feb2025.pdf" download class="link-underline">Click here</a> to download my resume!
-    </div>
-
-    <hr>
+    <hr />
     <div class="proficiencies-text">
-      <span class="section-title all-caps emphasis-red left-align">proficiencies</span>
+      <span class="section-title all-caps emphasis-red left-align"
+        >proficiencies</span
+      >
 
       <template v-if="showTouchLabel">
         <span>(tap items for more!)</span>
@@ -33,12 +31,22 @@
       :type="ProficiencyType.Dev"
       :techs="proficiency.techs"
       @updateMousePosition="updateMousePosition"
-      @hideYearsLabel="(value) => { hideLabelDiv = value }"
-      @setTechYears="(value) => { techYears = value }"
+      @hideYearsLabel="
+        (value) => {
+          hideLabelDiv = value;
+        }
+      "
+      @setTechYears="
+        (value) => {
+          techYears = value;
+        }
+      "
     />
 
-    <hr>
-    <p class="section-title emphasis-red all-caps left-align">professional experience</p>
+    <hr />
+    <p class="section-title emphasis-red all-caps left-align">
+      professional experience
+    </p>
 
     <experience-component
       v-for="employer in employers"
@@ -47,10 +55,10 @@
       :term-length="employer.termLength"
       :descriptions="employer.descriptions"
       :role="employer.role"
-      :url="employer.name"
+      :url="employer.url"
     />
 
-    <hr>
+    <hr />
     <p class="section-title emphasis-red all-caps left-align">education</p>
 
     <experience-component
@@ -90,7 +98,7 @@ export default defineComponent({
     CurvyArrow,
     ExperienceComponent,
     ProficienciesComponent,
-    FloatingLabelComponent
+    FloatingLabelComponent,
   },
 
   data: () => ({

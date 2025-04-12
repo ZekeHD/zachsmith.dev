@@ -1,16 +1,22 @@
 <template>
-<div class="experience_container">
-  <div class="name-term__container">
-    <span class="left-align">
-      <p>{{ name }}</p>
-      <p class="role">{{ role }}</p>
-    </span>
-    <span v-if="termLength" class="term-length left-align">{{ termLength }}</span>
+  <div class="experience_container">
+    <div class="name-term__container">
+      <span class="left-align">
+        <a
+          :href="url"
+          target="_blank"
+          class="employer-name link-underline"
+        >
+          {{ name }}
+        </a>
+        <p class="role">{{ role }}</p>
+      </span>
+      <span v-if="termLength" class="term-length left-align">{{ termLength }}</span>
+    </div>
+    <div v-if="descriptions" class="description__container left-align">
+      <p v-for="(description, i) in descriptions" :key="i">{{ description }}</p>
+    </div>
   </div>
-  <div v-if="descriptions" class="description__container left-align">
-    <p v-for="(description, i) in descriptions" :key="i">{{ description }}</p>
-  </div>
-</div>
 </template>
 
 <script lang="ts">
@@ -37,8 +43,12 @@ export default defineComponent({
     flex-direction: column;
     justify-content: space-between;
 
+    .employer-name, .term-length {
+      font-size: calc(18px + 1.4vw);
+    }
+
     .role {
-      font-size: calc(16px + 1.4vw);
+      font-size: calc(10px + 1.4vw);
     }
     
     @media screen and (min-width: 400px) {
@@ -50,6 +60,10 @@ export default defineComponent({
     .role {
       display: none;
     }
+
+    .employer-name, .term-length {
+      font-size: calc(14px + 1.4vw);
+    }
   }
 
   .description__container {
@@ -59,7 +73,7 @@ export default defineComponent({
     line-height: 1.2em;
 
     @include screen-gt($size-tablet) {
-      font-size: calc(20px + 1.5vw);
+      font-size: calc(14px + 1.5vw);
 
       @include screen-gt($size-desktop) {
         font-size: 40px;

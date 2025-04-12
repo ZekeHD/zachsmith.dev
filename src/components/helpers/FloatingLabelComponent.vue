@@ -1,5 +1,10 @@
 <template>
-  <div v-if="yearsAmount" id="floating-years__label" :class="{ 'hide': hide }" :style="mousePosition">
+  <div
+    v-if="yearsAmount"
+    id="floating-years__label"
+    :class="{ hide: hide }"
+    :style="mousePosition"
+  >
     <p>{{ yearsAmount }}+</p>
     <p>years</p>
   </div>
@@ -9,10 +14,10 @@
 import { defineComponent, PropType } from "@vue/runtime-core";
 
 export default defineComponent({
-  name: 'FloatingLabelComponent',
+  name: "FloatingLabelComponent",
   props: {
     hide: Boolean,
-    mousePosition: Object as PropType<{ left: string, top: string }>,
+    mousePosition: Object as PropType<{ left: string; top: string }>,
     yearsAmount: Number,
   },
 });
