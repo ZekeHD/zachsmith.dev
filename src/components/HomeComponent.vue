@@ -97,9 +97,6 @@ type CssProps = {
 
 export default defineComponent({
   name: "HomeComponent",
-  mounted() {
-    document.title = "ZS | Home";
-  },
 
   components: {
     CurvyArrow,

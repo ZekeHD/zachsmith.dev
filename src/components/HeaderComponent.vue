@@ -4,11 +4,13 @@
     <nav class="links-container">
       <ul class="links-container__list">
         <li class="home-text emphasis-red">
-          <router-link class="home-text__link" to="/"
-            ><span class="link-underline">Zach Smith.</span></router-link
-          >
+          <router-link class="home-text__link" to="/">
+            <span class="link-underline">Zach Smith.</span>
+          </router-link>
+
           <span class="home-text__text">Zach Smith.</span>
         </li>
+
         <template class="extra-links">
           <li>
             &nbsp;|&nbsp;&nbsp;<router-link
@@ -31,10 +33,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent } from 'vue';
 
 export default defineComponent({
-  name: "HeaderComponent",
+  name: 'HeaderComponent',
   props: {
     condenseHeader: Boolean,
   },
