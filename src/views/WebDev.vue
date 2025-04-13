@@ -67,6 +67,7 @@
       :name="education.name"
       :term-length="education.termLength"
       :descriptions="education.descriptions"
+      :url="education.url"
     />
 
     <floating-label-component
