@@ -72,7 +72,7 @@ export default defineComponent({
     FloatingLabelComponent,
   },
   mounted() {
-    document.title = 'ZS | Sound Designer';
+    document.title = 'Zach Smith | Sound Designer';
   },
 
   setup: () => ({

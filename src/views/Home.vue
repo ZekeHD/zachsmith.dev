@@ -13,9 +13,14 @@ import NavComponent from "../components/NavComponent.vue";
 
 @Options({
   name: "HomeView",
+
   components: {
     HomeComponent,
     NavComponent,
+  },
+
+  mounted() {
+    document.title = "Zach Smith | Home";
   },
 })
 export default class Home extends Vue {}

@@ -107,7 +107,7 @@ export default defineComponent({
   }),
 
   mounted() {
-    document.title = 'ZS | Web Engineer';
+    document.title = 'Zach Smith | Web Engineer';
   },
 
   setup: () => ({
