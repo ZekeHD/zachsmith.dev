@@ -1,4 +1,4 @@
-name: Foo required for merge
+name: Linda required for merge
 
 on:
   pull_request:
@@ -16,8 +16,8 @@ jobs:
       - name: Evaluate Review Conditions
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          REQUIRED_USER: "ZekeHD"
-          TARGET_LABEL: "ZekeHD-required"
+          REQUIRED_USER: "lsi1verthorn"
+          TARGET_LABEL: "linda-required"
           PR_NUMBER: ${{ github.event.pull_request.number }}
         run: |
           # 1. Fetch labels on the current PR
@@ -31,7 +31,7 @@ jobs:
           
           # Check if the specific label is applied
           if echo "$LABELS" | grep -qx "$TARGET_LABEL"; then
-            echo "::notice::Label '$TARGET_LABEL' is present. ZekeHD must review and approve before this PR can be merged."
+            echo "::notice::Label '$TARGET_LABEL' is present. Linda must review and approve before this PR can be merged."
             
             # Check if the specific required user has approved
             if echo "$APPROVED_USERS" | grep -qx "$REQUIRED_USER"; then
