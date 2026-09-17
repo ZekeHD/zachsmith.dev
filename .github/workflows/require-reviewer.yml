@@ -1,0 +1,61 @@
+name: Foo required for merge
+
+on:
+  pull_request:
+    types: [opened, labeled, unlabeled, synchronize]
+  pull_request_review:
+    types: [submitted, dismissed]
+
+jobs:
+  validate-reviews:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Evaluate Review Conditions
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REQUIRED_USER: "ZekeHD"
+          TARGET_LABEL: "ZekeHD-required"
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          # 1. Fetch labels on the current PR
+          LABELS=$(gh pr view $PR_NUMBER --json labels -q '.labels[].name')
+          
+          # 2. Fetch all approved reviews
+          APPROVED_USERS=$(gh pr view $PR_NUMBER --json reviews -q '[.reviews[] | select(.state == "APPROVED")] | .[].author.login')
+          TOTAL_APPROVALS=$(echo "$APPROVED_USERS" | grep -v '^$' | wc -l)
+
+          echo "::notice::Total approved reviews: $TOTAL_APPROVALS"
+          
+          # Check if the specific label is applied
+          if echo "$LABELS" | grep -qx "$TARGET_LABEL"; then
+            echo "::notice::Label '$TARGET_LABEL' is present. ZekeHD must review and approve before this PR can be merged."
+            
+            # Check if the specific required user has approved
+            if echo "$APPROVED_USERS" | grep -qx "$REQUIRED_USER"; then
+              echo "::notice::✅ Required reviewer ($REQUIRED_USER) has approved."
+              
+              # Must have the specific reviewer + at least 1 other (Total >= 2)
+              if [ "$TOTAL_APPROVALS" -ge 2 ]; then
+                echo "::notice::✅ Total approval count ($TOTAL_APPROVALS) satisfies the 'Required + 1 other' rule."
+                exit 0
+              else
+                echo "::error::❌ Required reviewer approved, but you need at least 1 more approval from anyone else."
+                exit 1
+              fi
+            else
+              echo "::error::❌ This PR has the '$TARGET_LABEL' label. It MUST be approved by '$REQUIRED_USER'."
+              exit 1
+            fi
+
+          else
+            echo "::notice::2 non-specific reviewers must approve this PR before it can be merged."
+            
+            # Default rule: Any 2 reviewers
+            if [ "$TOTAL_APPROVALS" -ge 2 ]; then
+              echo "::notice::✅ Total approval count ($TOTAL_APPROVALS) satisfies the standard rule."
+              exit 0
+            else
+              echo "::error::❌ Standard PRs require at least 2 approvals. Current approvals: $TOTAL_APPROVALS"
+              exit 1
+            fi
+          fi
