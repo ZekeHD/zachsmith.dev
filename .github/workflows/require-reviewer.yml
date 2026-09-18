@@ -55,16 +55,12 @@ jobs:
               }
             }
 
-            latestByUser.forEach((value, key) => {
-              console.log(key);
-              console.log(value);
-              console.log("\n");
-            });
-
             const approvedUsers = [...latestByUser.values()]
               .filter(r => r.state === 'APPROVED')
               .map(r => r.user.login)
               .filter(login => !pending.has(login));
+
+            console.log(approvedUsers);
 
             const labels = pr.labels.map(l => l.name);
             let result = 'success', message = '';
