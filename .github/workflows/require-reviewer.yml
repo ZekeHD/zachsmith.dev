@@ -1,0 +1,103 @@
+name: Linda required for merge
+
+on:
+  pull_request:
+    types:
+      [
+        opened,
+        reopened,
+        synchronize,
+        labeled,
+        unlabeled,
+        review_requested,
+        review_request_removed,
+      ]
+  pull_request_review:
+    types: [submitted, edited, dismissed]
+
+permissions:
+  contents: read
+  statuses: write
+
+jobs:
+  validate-reviews:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Evaluate Review Conditions
+        id: evaluate
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const prNumber = context.payload.pull_request.number;
+            const requiredUser = 'lsi1verthorn';
+            const targetLabel = 'linda-required';
+
+            const { data: pr } = await github.rest.pulls.get({
+              ...context.repo, pull_number: prNumber,
+            });
+            const { data: reviews } = await github.rest.pulls.listReviews({
+              ...context.repo, pull_number: prNumber,
+            });
+            const { data: requested } = await github.rest.pulls.listRequestedReviewers({
+              ...context.repo, pull_number: prNumber,
+            });
+
+            const pending = new Set(requested.users.map(u => u.login));
+
+            const latestByUser = new Map();
+            for (const r of reviews) {
+              const existing = latestByUser.get(r.user.login);
+              if (!existing || new Date(r.submitted_at) > new Date(existing.submitted_at)) {
+                latestByUser.set(r.user.login, r);
+              }
+            }
+
+            const approvedUsers = [...latestByUser.values()]
+              .filter(r => r.state === 'APPROVED')
+              .map(r => r.user.login)
+              .filter(login => !pending.has(login));
+
+            console.log(approvedUsers);
+
+            const labels = pr.labels.map(l => l.name);
+            let result = 'success', message = '';
+
+            if (labels.includes(targetLabel)) {
+              if (!approvedUsers.includes(requiredUser)) {
+                result = 'failure';
+                message = `Label '${targetLabel}' present; must be approved by ${requiredUser}.`;
+              } else if (approvedUsers.length < 2) {
+                result = 'failure';
+                message = 'Required reviewer approved, but needs at least 1 more approval.';
+              } else {
+                message = `Required reviewer approved. ${approvedUsers.length} total approvals.`;
+              }
+            } else if (approvedUsers.length < 2) {
+              result = 'failure';
+              message = `Standard PRs require 2 approvals. Current: ${approvedUsers.length}.`;
+            } else {
+              message = `${approvedUsers.length} approvals satisfy the standard rule.`;
+            }
+
+            core.setOutput('conclusion', result);
+            core.setOutput('message', message);
+
+      - name: Publish consolidated check
+        uses: actions/github-script@v7
+        env:
+          CONCLUSION: ${{ steps.evaluate.outputs.conclusion }}
+          SUMMARY: ${{ steps.evaluate.outputs.message }}
+        with:
+          script: |
+            const sha = context.payload.pull_request.head.sha;
+
+            await github.rest.repos.createCommitStatus({
+              ...context.repo,
+              sha,
+              state: process.env.CONCLUSION === 'success' ? 'success' : 'failure',
+              context: 'Linda required for merge',
+              description: (process.env.SUMMARY || '').slice(0, 140),
+            });
