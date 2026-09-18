@@ -38,7 +38,7 @@ jobs:
 
           echo "::notice::Raw reviews output:"
           gh pr view $PR_NUMBER --json reviews -q '.reviews[]'
-          gh pr view $PR_NUMBER --json reviewRequests -q '.reviewRequests[].login'
+          gh pr view $PR_NUMBER --json reviewRequests -q '.reviewRequests[]'
 
           PENDING_REVIEWERS=$(gh pr view $PR_NUMBER --json reviewRequests -q '.reviewRequests[].login')
           APPROVED_USERS=$(gh pr view $PR_NUMBER --json reviews -q '.reviews | group_by(.author.login) | map(max_by(.submittedAt) | select(.state == "APPROVED")) | .[].author.login')
