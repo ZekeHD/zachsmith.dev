@@ -81,17 +81,18 @@ jobs:
               message = `${approvedUsers.length} approvals satisfy the standard rule.`;
             }
 
-            core.setOutput('result', result);
+            console.log(message);
+
+            core.setOutput('conclusion', result);
             core.setOutput('message', message);
 
       - name: Publish consolidated check
         uses: actions/github-script@v7
         env:
-          CONCLUSION: ${{ steps.evaluate.outputs.result }}
+          CONCLUSION: ${{ steps.evaluate.outputs.conclusion }}
           SUMMARY: ${{ steps.evaluate.outputs.message }}
         with:
           script: |
-            console.log(context);
             const sha = context.payload.pull_request.head.sha;
             const checkName = 'Linda required for merge';
 
