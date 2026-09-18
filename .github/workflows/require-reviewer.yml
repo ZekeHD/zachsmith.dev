@@ -24,7 +24,7 @@ jobs:
           LABELS=$(gh pr view $PR_NUMBER --json labels -q '.labels[].name')
           
           # 2. Fetch all approved reviews
-          APPROVED_USERS=$(gh pr view $PR_NUMBER --json reviews -q '[.reviews[] | select(.state == "APPROVED")] | .[].author.login')
+          APPROVED_USERS=$(gh pr view $PR_NUMBER --json reviews -q '[.reviews[] | select(.state == "APPROVED" and .dismissedAt == null)] | .[].author.login')
           TOTAL_APPROVALS=$(echo "$APPROVED_USERS" | grep -v '^$' | wc -l)
 
           echo "::notice::Total approved reviews: $TOTAL_APPROVALS"
