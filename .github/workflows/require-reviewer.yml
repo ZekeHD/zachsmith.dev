@@ -85,30 +85,29 @@ jobs:
             core.setOutput('message', message);
 
       - name: Publish consolidated check
+        uses: actions/github-script@v7
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          SHA="${{ github.event.pull_request.head.sha }}"
-          CHECK_NAME="Linda required for merge"
-          CONCLUSION="${{ steps.evaluate.outputs.result }}"
-          SUMMARY="${{ steps.evaluate.outputs.message }}"
+          CONCLUSION: ${{ steps.evaluate.outputs.result }}
+          SUMMARY: ${{ steps.evaluate.outputs.message }}
+        with:
+          script: |
+            const sha = context.payload.pull_request.head.sha;
+            const checkName = 'Linda required for merge';
 
-          EXISTING_ID=$(gh api "repos/${{ github.repository }}/commits/$SHA/check-runs" \
-            -q ".check_runs[] | select(.name == \"$CHECK_NAME\") | .id" | head -n1)
+            const { data: { check_runs } } = await github.rest.checks.listForRef({
+              ...context.repo, ref: sha,
+            });
+            const existing = check_runs.find(c => c.name === checkName);
 
-          if [ -n "$EXISTING_ID" ]; then
-            gh api "repos/${{ github.repository }}/check-runs/$EXISTING_ID" \
-              -X PATCH \
-              -f status="completed" \
-              -f conclusion="$CONCLUSION" \
-              -f "output[title]=Review validation" \
-              -f "output[summary]=$SUMMARY"
-          else
-            gh api "repos/${{ github.repository }}/check-runs" \
-              -f name="$CHECK_NAME" \
-              -f head_sha="$SHA" \
-              -f status="completed" \
-              -f conclusion="$CONCLUSION" \
-              -f "output[title]=Review validation" \
-              -f "output[summary]=$SUMMARY"
-          fi
+            const payload = {
+              ...context.repo,
+              status: 'completed',
+              conclusion: process.env.CONCLUSION,
+              output: { title: 'Review validation', summary: process.env.SUMMARY },
+            };
+
+            if (existing) {
+              await github.rest.checks.update({ ...payload, check_run_id: existing.id });
+            } else {
+              await github.rest.checks.create({ ...payload, name: checkName, head_sha: sha });
+            }
