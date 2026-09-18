@@ -73,7 +73,7 @@ jobs:
                 result = 'failure';
                 message = 'Required reviewer approved, but needs at least 1 more approval.';
               } else {
-                message = `Required reviewer approved + ${approvedUsers.length} total approvals.`;
+                message = `Required reviewer approved. ${approvedUsers.length} total approvals.`;
               }
             } else if (approvedUsers.length < 2) {
               result = 'failure';
@@ -81,8 +81,6 @@ jobs:
             } else {
               message = `${approvedUsers.length} approvals satisfy the standard rule.`;
             }
-
-            console.log(message);
 
             core.setOutput('conclusion', result);
             core.setOutput('message', message);
@@ -97,9 +95,18 @@ jobs:
             const sha = context.payload.pull_request.head.sha;
             const checkName = 'Linda required for merge';
 
+            core.info(`Target SHA: ${sha}`);
+            core.info(`Conclusion to publish: ${process.env.CONCLUSION}`);
+
             const { data: { check_runs } } = await github.rest.checks.listForRef({
               ...context.repo, ref: sha,
             });
+
+            core.info(`Found ${check_runs.length} check run(s) for this SHA:`);
+            for (const c of check_runs) {
+              core.info(`  - id=${c.id} name="${c.name}" status=${c.status} conclusion=${c.conclusion}`);
+            }
+
             const existing = check_runs.find(c => c.name === checkName);
 
             const payload = {
@@ -109,8 +116,13 @@ jobs:
               output: { title: 'Review validation', summary: process.env.SUMMARY },
             };
 
+            let result;
             if (existing) {
-              await github.rest.checks.update({ ...payload, check_run_id: existing.id });
+              core.info(`Updating existing check run id=${existing.id}`);
+              result = await github.rest.checks.update({ ...payload, check_run_id: existing.id });
             } else {
-              await github.rest.checks.create({ ...payload, name: checkName, head_sha: sha });
+              core.info('No existing check run found — creating a new one');
+              result = await github.rest.checks.create({ ...payload, name: checkName, head_sha: sha });
             }
+
+            core.info(`Published: id=${result.data.id}, conclusion=${result.data.conclusion}, url=${result.data.html_url}`);
