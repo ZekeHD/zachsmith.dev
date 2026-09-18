@@ -28,54 +28,61 @@ jobs:
 
       - name: Evaluate Review Conditions
         id: evaluate
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          REQUIRED_USER: "lsi1verthorn"
-          TARGET_LABEL: "linda-required"
-          PR_NUMBER: ${{ github.event.pull_request.number }}
-        run: |
-          LABELS=$(gh pr view $PR_NUMBER --json labels -q '.labels[].name')
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const prNumber = context.payload.pull_request.number;
+            const requiredUser = 'lsi1verthorn';
+            const targetLabel = 'linda-required';
 
-          echo "::notice::Raw reviews output:"
-          gh pr view $PR_NUMBER --json reviews -q '.reviews[]'
-          echo "::notice::Re-requested reviews output:"
-          gh pr view $PR_NUMBER --json reviewRequests -q '.reviewRequests[]'
+            const { data: pr } = await github.rest.pulls.get({
+              ...context.repo, pull_number: prNumber,
+            });
+            const { data: reviews } = await github.rest.pulls.listReviews({
+              ...context.repo, pull_number: prNumber,
+            });
+            const { data: requested } = await github.rest.pulls.listRequestedReviewers({
+              ...context.repo, pull_number: prNumber,
+            });
 
-          PENDING_REVIEWERS=$(gh pr view $PR_NUMBER --json reviewRequests -q '.reviewRequests[].login')
-          APPROVED_USERS=$(gh pr view $PR_NUMBER --json reviews -q '.reviews | group_by(.author.login) | map(max_by(.submittedAt) | select(.state == "APPROVED")) | .[].author.login')
+            const pending = new Set(requested.users.map(u => u.login));
+            console.log(pending);
 
-          if [ -n "$PENDING_REVIEWERS" ]; then
-            APPROVED_USERS=$(comm -23 <(echo "$APPROVED_USERS" | sort) <(echo "$PENDING_REVIEWERS" | sort))
-          fi
+            const latestByUser = new Map();
+            for (const r of reviews) {
+              const existing = latestByUser.get(r.user.login);
+              if (!existing || new Date(r.submitted_at) > new Date(existing.submitted_at)) {
+                latestByUser.set(r.user.login, r);
+              }
+            }
 
-          TOTAL_APPROVALS=$(echo "$APPROVED_USERS" | grep -v '^$' | wc -l)
+            const approvedUsers = [...latestByUser.values()]
+              .filter(r => r.state === 'APPROVED')
+              .map(r => r.user.login)
+              .filter(login => !pending.has(login));
 
-          RESULT="success"
-          MESSAGE=""
+            const labels = pr.labels.map(l => l.name);
+            let result = 'success', message = '';
 
-          if echo "$LABELS" | grep -qx "$TARGET_LABEL"; then
-            if echo "$APPROVED_USERS" | grep -qx "$REQUIRED_USER"; then
-              if [ "$TOTAL_APPROVALS" -ge 2 ]; then
-                MESSAGE="Required reviewer approved + $TOTAL_APPROVALS total approvals."
-              else
-                RESULT="failure"
-                MESSAGE="Required reviewer approved, but needs at least 1 more approval."
-              fi
-            else
-              RESULT="failure"
-              MESSAGE="Label '$TARGET_LABEL' present; must be approved by $REQUIRED_USER."
-            fi
-          else
-            if [ "$TOTAL_APPROVALS" -ge 2 ]; then
-              MESSAGE="$TOTAL_APPROVALS approvals satisfy the standard rule."
-            else
-              RESULT="failure"
-              MESSAGE="Standard PRs require 2 approvals. Current: $TOTAL_APPROVALS."
-            fi
-          fi
+            if (labels.includes(targetLabel)) {
+              if (!approvedUsers.includes(requiredUser)) {
+                result = 'failure';
+                message = `Label '${targetLabel}' present; must be approved by ${requiredUser}.`;
+              } else if (approvedUsers.length < 2) {
+                result = 'failure';
+                message = 'Required reviewer approved, but needs at least 1 more approval.';
+              } else {
+                message = `Required reviewer approved + ${approvedUsers.length} total approvals.`;
+              }
+            } else if (approvedUsers.length < 2) {
+              result = 'failure';
+              message = `Standard PRs require 2 approvals. Current: ${approvedUsers.length}.`;
+            } else {
+              message = `${approvedUsers.length} approvals satisfy the standard rule.`;
+            }
 
-          echo "result=$RESULT" >> "$GITHUB_OUTPUT"
-          echo "message=$MESSAGE" >> "$GITHUB_OUTPUT"
+            core.setOutput('result', result);
+            core.setOutput('message', message);
 
       - name: Publish consolidated check
         env:
