@@ -22,6 +22,9 @@ jobs:
         run: |
           # 1. Fetch labels on the current PR
           LABELS=$(gh pr view $PR_NUMBER --json labels -q '.labels[].name')
+
+          echo "::notice::Raw reviews output:"
+          gh pr view $PR_NUMBER --json reviews -q '.reviews[]'
           
           # 2. Fetch all approved reviews
           APPROVED_USERS=$(gh pr view $PR_NUMBER --json reviews -q '[.reviews[] | select(.state == "APPROVED" and .dismissedAt == null)] | .[].author.login')
