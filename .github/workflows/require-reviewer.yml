@@ -56,7 +56,9 @@ jobs:
             }
 
             latestByUser.forEach((value, key) => {
-              console.log(`${key} => ${value}`);
+              console.log(key);
+              console.log(value);
+              console.log("\n");
             });
 
             const approvedUsers = [...latestByUser.values()]
