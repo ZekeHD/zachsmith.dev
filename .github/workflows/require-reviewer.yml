@@ -17,7 +17,7 @@ on:
 
 permissions:
   contents: read
-  checks: write
+  statuses: write
 
 jobs:
   validate-reviews:
@@ -93,36 +93,11 @@ jobs:
         with:
           script: |
             const sha = context.payload.pull_request.head.sha;
-            const checkName = 'Linda required for merge';
 
-            core.info(`Target SHA: ${sha}`);
-            core.info(`Conclusion to publish: ${process.env.CONCLUSION}`);
-
-            const { data: { check_runs } } = await github.rest.checks.listForRef({
-              ...context.repo, ref: sha,
-            });
-
-            core.info(`Found ${check_runs.length} check run(s) for this SHA:`);
-            for (const c of check_runs) {
-              core.info(`  - id=${c.id} name="${c.name}" status=${c.status} conclusion=${c.conclusion}`);
-            }
-
-            const existing = check_runs.find(c => c.name === checkName);
-
-            const payload = {
+            await github.rest.repos.createCommitStatus({
               ...context.repo,
-              status: 'completed',
-              conclusion: process.env.CONCLUSION,
-              output: { title: 'Review validation', summary: process.env.SUMMARY },
-            };
-
-            let result;
-            if (existing) {
-              core.info(`Updating existing check run id=${existing.id}`);
-              result = await github.rest.checks.update({ ...payload, check_run_id: existing.id });
-            } else {
-              core.info('No existing check run found — creating a new one');
-              result = await github.rest.checks.create({ ...payload, name: checkName, head_sha: sha });
-            }
-
-            core.info(`Published: id=${result.data.id}, conclusion=${result.data.conclusion}, url=${result.data.html_url}`);
+              sha,
+              state: process.env.CONCLUSION === 'success' ? 'success' : 'failure',
+              context: 'Linda required for merge',
+              description: (process.env.SUMMARY || '').slice(0, 140),
+            });
