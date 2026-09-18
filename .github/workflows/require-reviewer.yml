@@ -1,8 +1,6 @@
 name: Linda required for merge
 
 on:
-  pull_request:
-    types: [opened, labeled, unlabeled, synchronize]
   pull_request_review:
     types: [submitted, dismissed]
 
