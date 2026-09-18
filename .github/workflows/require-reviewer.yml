@@ -27,7 +27,7 @@ jobs:
           APPROVED_USERS=$(gh pr view $PR_NUMBER --json reviews -q '[.reviews[] | select(.state == "APPROVED")] | .[].author.login')
           TOTAL_APPROVALS=$(echo "$APPROVED_USERS" | grep -v '^$' | wc -l)
 
-          echo "::notice::Total approved reviews: $TOTAL_APPROVALS"
+          echo "::notice::Total approved reviewss: $TOTAL_APPROVALS"
           
           # Check if the specific label is applied
           if echo "$LABELS" | grep -qx "$TARGET_LABEL"; then
