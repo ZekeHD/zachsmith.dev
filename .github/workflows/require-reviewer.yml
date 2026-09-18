@@ -26,7 +26,14 @@ jobs:
           PR_NUMBER: ${{ github.event.pull_request.number }}
         run: |
           LABELS=$(gh pr view $PR_NUMBER --json labels -q '.labels[].name')
+
+          PENDING_REVIEWERS=$(gh pr view $PR_NUMBER --json reviewRequests -q '.reviewRequests[].login')
           APPROVED_USERS=$(gh pr view $PR_NUMBER --json reviews -q '.reviews | group_by(.author.login) | map(max_by(.submittedAt) | select(.state == "APPROVED")) | .[].author.login')
+
+          if [ -n "$PENDING_REVIEWERS" ]; then
+            APPROVED_USERS=$(comm -23 <(echo "$APPROVED_USERS" | sort) <(echo "$PENDING_REVIEWERS" | sort))
+          fi
+
           TOTAL_APPROVALS=$(echo "$APPROVED_USERS" | grep -v '^$' | wc -l)
 
           RESULT="success"
