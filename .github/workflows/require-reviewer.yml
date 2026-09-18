@@ -46,7 +46,6 @@ jobs:
             });
 
             const pending = new Set(requested.users.map(u => u.login));
-            console.log(pending);
 
             const latestByUser = new Map();
             for (const r of reviews) {
@@ -55,6 +54,10 @@ jobs:
                 latestByUser.set(r.user.login, r);
               }
             }
+
+            latestByUser.forEach((value, key) => {
+              console.log(`${key} => ${value}`);
+            });
 
             const approvedUsers = [...latestByUser.values()]
               .filter(r => r.state === 'APPROVED')
