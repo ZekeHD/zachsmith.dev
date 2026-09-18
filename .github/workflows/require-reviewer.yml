@@ -91,6 +91,7 @@ jobs:
           SUMMARY: ${{ steps.evaluate.outputs.message }}
         with:
           script: |
+            console.log(context);
             const sha = context.payload.pull_request.head.sha;
             const checkName = 'Linda required for merge';
 
